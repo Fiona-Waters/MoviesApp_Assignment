@@ -13,6 +13,8 @@ import StarRateIcon from "@material-ui/icons/StarRate";
 import IconButton from "@material-ui/core/IconButton";
 import Grid from "@material-ui/core/Grid";
 import { Link } from "react-router-dom";
+import Avatar from "@material-ui/core/Avatar";
+
 
 
 const useStyles = makeStyles({
@@ -26,9 +28,29 @@ const useStyles = makeStyles({
 export default function MovieCard(props) {
   const classes = useStyles();
   const movie = props.movie;
+
+  const handleAddToFavourite = (e) => {
+    e.preventDefault();
+    props.selectFavourite(movie.id);
+  };
+
   return (
     <Card className={classes.card}>
-      <CardHeader className={classes.header} title={movie.title} />
+      <CardHeader
+      className={classes.header}
+      avatar={
+        movie.favourite ? (
+          <Avatar className={classes.avatar}>
+            <FavoriteIcon />
+          </Avatar>
+        ) : null
+      }
+      title={
+        <Typography variant="h5" component="p">
+          {movie.title}{" "}
+        </Typography>
+      }
+    />
       <CardMedia
         className={classes.media}
         image={
@@ -54,9 +76,9 @@ export default function MovieCard(props) {
         </Grid>
       </CardContent>
       <CardActions disableSpacing>
-        <IconButton aria-label="add to favorites" onClick={null}>
-          <FavoriteIcon color="primary" fontSize="large" />
-        </IconButton>
+        <IconButton aria-label="add to favourites" onClick={handleAddToFavourite}>
+        <FavoriteIcon color="primary" fontSize="large" />
+    </IconButton>
         <Link to={`/movies/${movie.id}`}>
           <Button variant="outlined" size="medium" color="primary">
             More Info ...
