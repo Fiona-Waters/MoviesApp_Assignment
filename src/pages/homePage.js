@@ -18,10 +18,6 @@ const HomePage = (props) => {
   }  
   const movies = data.results;
 
-  // These three lines are redundant; we will replace them laterg.
-  const favourites = movies.filter(m => m.favouurite)
-  localStorage.setItem('favourites', JSON.stringify(favourites))
-
   return (
     <PageTemplate
       title="Discover Movies"
