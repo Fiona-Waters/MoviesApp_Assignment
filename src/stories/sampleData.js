@@ -1,4 +1,4 @@
-export default {
+export const SampleMovie = {
   adult: false,
   backdrop_path: "/5Iw7zQTHVRBOYpA0V6z0yypOPZh.jpg",
   belongs_to_collection: {
@@ -77,4 +77,81 @@ export default {
   video: false,
   vote_average: 7,
   vote_count: 9692,
+};
+
+export const sampleTV = {
+  
+    adult: false,
+    backdrop_path: null,
+    created_by: [
+      
+    ],
+    episode_run_time: [
+      
+    ],
+    first_air_date: "2022-07-01",
+    genres: [
+      
+    ],
+    homepage: "",
+    id: 206114,
+    in_production: true,
+    languages: [
+      
+    ],
+    last_air_date: "2022-07-01",
+    last_episode_to_air: {
+      air_date: "2022-07-01",
+      episode_number: 1,
+      id: 3837921,
+      name: "Episode 1",
+      overview: "",
+      production_code: "",
+      runtime: null,
+      season_number: 1,
+      show_id: 206114,
+      still_path: null,
+      vote_average: 0.0,
+      vote_count: 0
+    },
+    name: "Curso PEIF SME SP Pré-Edital 2022",
+    next_episode_to_air: null,
+    networks: [
+      
+    ],
+    number_of_episodes: 1,
+    number_of_seasons: 1,
+    origin_country: [
+      "BR"
+    ],
+    original_language: "pt",
+    original_name: "Curso PEIF SME SP Pré-Edital 2022",
+    overview: "",
+    popularity: 0.0,
+    poster_path: "/jmBHrdK6KtqlTopGrqJuoE22Lsu.jpg",
+    production_companies: [
+      
+    ],
+    production_countries: [
+      
+    ],
+    seasons: [
+      {
+        air_date: "2022-07-01",
+        episode_count: 1,
+        id: 300974,
+        name: "Season 1",
+        overview: "",
+        poster_path: null,
+        season_number: 1
+      }
+    ],
+    spoken_languages: [
+      
+    ],
+    status: "Returning Series",
+    tagline: "",
+    type: "Scripted",
+    vote_average: 0.0,
+    vote_count: 0
 };
