@@ -29,7 +29,7 @@ const TvSeriesPage = (props) => {
       title="Discover TV Shows"
       shows={tvShows}
       action={(tvShow) => {
-        return <AddToFavouritesIcon tvShow={tvShow} />
+        return <AddToFavouritesIcon show={tvShow} />
       }}
     />
 );

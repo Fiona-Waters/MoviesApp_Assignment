@@ -2,20 +2,31 @@ import React, { useContext } from "react";
 import PageTemplate from "../components/templateListPage";
 import { MoviesContext } from "../contexts/moviesContext";
 import { useQueries } from "react-query";
-import { getMovie } from "../api/tmdb-api";
+import { getMovie, getTVShow } from "../api/tmdb-api";
 import Spinner from "../components/spinner";
 import RemoveFromFavourites from "../components/cardIcons/removeFromFavourites";
 import WriteReview from "../components/cardIcons/writeReview";
 
 const FavouriteMoviesPage = () => {
-  const { favourites: movieIds } = useContext(MoviesContext);
+  const { movieFavourites, tvFavourites } = useContext(MoviesContext);
 
+ console.log("moviefavourites", movieFavourites)
+ console.log("tvfavourites", tvFavourites)
   // Create an array of queries and run in parallel.
   const favouriteMovieQueries = useQueries(
-    movieIds.map((movieId) => {
+    movieFavourites.map((movieId) => {
       return {
         queryKey: ["movie", { id: movieId }],
         queryFn: getMovie,
+      };
+    })
+  );
+
+  const favouriteTvQueries = useQueries(
+    tvFavourites.map((tvId) => {
+      return {
+        queryKey: ["tv", {id: tvId}],
+        queryFn: getTVShow,
       };
     })
   );
@@ -26,24 +37,40 @@ const FavouriteMoviesPage = () => {
     return <Spinner />;
   }
 
+  const isLoading2 = favouriteTvQueries.find((t) => t.isLoading === true);
+
+  if (isLoading2) {
+    return <Spinner />;
+  }
+
   const movies = favouriteMovieQueries.map((q) => {
     q.data.type = "MOVIE";
     q.data.genre_ids = q.data.genres.map((g) => g.id);
     return q.data;
   });
 
+  const tvShows = favouriteTvQueries.map((t) => {
+    t.data.type = "TV_SHOW";
+   // t.data.genre_ids = t.data.genres.map((g) => g.id);
+    return t.data;
+  })
+
+  const allFavourites = movies.concat(tvShows);
+  console.log("all favourites", allFavourites)
+
   return (
     <PageTemplate
       title="Favourite Movies"
-      shows={movies}
-      action={(movie) => {
+      shows={allFavourites}
+      action={(show) =>
+      {
         return (
           <>
-            <RemoveFromFavourites movie={movie} />
-            <WriteReview movie={movie} />
+            <RemoveFromFavourites show={show} />
+            <WriteReview show={show} />
           </>
         );
-      }}
+      }} 
     />
   );
 };
