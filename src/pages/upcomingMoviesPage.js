@@ -1,5 +1,5 @@
 import React from "react";
-import PageTemplate from '../components/templateMovieListPage';
+import PageTemplate from '../components/templateListPage';
 import { getUpcomingMovies } from "../api/tmdb-api";
 import { useQuery } from 'react-query'; 
 import Spinner from '../components/spinner';
@@ -8,7 +8,6 @@ import MyPlaylistAddIcon from "../components/cardIcons/playlistAddIcon";
 const UpcomingMoviesPage = (props) => {
   const { data, error, isLoading, isError } = useQuery('movie', getUpcomingMovies)
 
-  const addToFavourites = () => null;
   if (isLoading) {
     return <Spinner />
   }
@@ -16,16 +15,18 @@ const UpcomingMoviesPage = (props) => {
   if (isError) {
     return <h1>{error.message}</h1>
   }  
-  const movies = data.results;
+  const movies = data.results.map((movie) => {
+    movie.type = "MOVIE";
+    return movie
+  });
 
   return (
     <PageTemplate
       title='Upcoming Movies'
-      movies={movies}
+      shows={movies}
       action={(movie) => {
         return <MyPlaylistAddIcon movie={movie} />
       }}
-      selectFavourite={addToFavourites}
     />
   );
 };

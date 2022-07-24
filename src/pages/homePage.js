@@ -1,5 +1,5 @@
 import React from "react";
-import PageTemplate from "../components/templateMovieListPage";
+import PageTemplate from "../components/templateListPage";
 import { useQuery } from 'react-query';
 import Spinner from '../components/spinner';
 import {getMovies} from '../api/tmdb-api';
@@ -16,12 +16,15 @@ const HomePage = (props) => {
   if (isError) {
     return <h1>{error.message}</h1>
   }  
-  const movies = data.results;
+  const movies = data.results.map((movie) => {
+    movie.type = "MOVIE";
+    return movie;
+  });
 
   return (
     <PageTemplate
       title="Discover Movies"
-      movies={movies}
+      shows={movies}
       action={(movie) => {
         return <AddToFavouritesIcon movie={movie} />
       }}

@@ -42,7 +42,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const MovieDetails = ( {movie}) => {
+const ShowDetails = ( {show}) => {
   const classes = useStyles();
   const [drawerOpen, setDrawerOpen] = useState(false); // New
 
@@ -53,30 +53,30 @@ const MovieDetails = ( {movie}) => {
       </Typography>
 
       <Typography variant="h6" component="p">
-        {movie.overview}
+        {show.overview}
       </Typography>
       <div className={classes.chipRoot}>
       <Paper component="ul" className={classes.chipSet}>
         <li>
           <Chip label="Genres" className={classes.chipLabel} color="primary" />
         </li>
-        {movie.genres.map((g) => (
+        {show.genres.map((g) => (
           <li key={g.name}>
             <Chip label={g.name} className={classes.chip} />
           </li>
         ))}
       </Paper>
       <Paper component="ul" className={classes.chipSet}>
-        <Chip icon={<AccessTimeIcon />} label={`${movie.runtime} min.`} />
+        <Chip icon={<AccessTimeIcon />} label={`${show.runtime} min.`} />
         <Chip
           icon={<MonetizationIcon />}
-          label={`${movie.revenue.toLocaleString()}`}
+          label={`${show.revenue.toLocaleString()}`}
         />
         <Chip
           icon={<StarRate />}
-          label={`${movie.vote_average} (${movie.vote_count}`}
+          label={`${show.vote_average} (${show.vote_count}`}
         />
-        <Chip label={`Released: ${movie.release_date}`} />
+        <Chip label={`Released: ${show.release_date}`} />
       </Paper>
       </div>
       {/* New */}
@@ -90,9 +90,9 @@ const MovieDetails = ( {movie}) => {
         Reviews
       </Fab>
       <Drawer anchor="top" open={drawerOpen} onClose={() => setDrawerOpen(false)}>
-        <MovieReviews movie={movie} />
+        <MovieReviews movie={show} />
       </Drawer>
     </>
   );
 };
-export default  MovieDetails ;
+export default  ShowDetails ;
