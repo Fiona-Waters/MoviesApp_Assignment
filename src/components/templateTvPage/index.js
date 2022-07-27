@@ -1,12 +1,12 @@
 import React from "react";
-import MovieHeader from "../headerMovie";
+import TVShowHeader from "../headerTVShow";
 import Grid from "@material-ui/core/Grid";
 import { makeStyles } from "@material-ui/core/styles";
 import ImageList from "@material-ui/core/ImageList";
 import ImageListItem from "@material-ui/core/ImageListItem";
 import { getTvImages } from "../../api/tmdb-api";
 import { useQuery } from "react-query";
-import Spinner from '../spinner';
+import Spinner from "../spinner";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -19,13 +19,13 @@ const useStyles = makeStyles((theme) => ({
   },
   imageList: {
     width: 450,
-    height: '100vh',
+    height: "100vh",
   },
 }));
 
 const TemplateTvPage = ({ tvShow, children }) => {
   const classes = useStyles();
-  const { data , error, isLoading, isError } = useQuery(
+  const { data, error, isLoading, isError } = useQuery(
     ["images", { id: tvShow.id }],
     getTvImages
   );
@@ -37,24 +37,21 @@ const TemplateTvPage = ({ tvShow, children }) => {
   if (isError) {
     return <h1>{error.message}</h1>;
   }
-  const images = data.posters 
 
   return (
     <div className={classes.root}>
-      <MovieHeader tvShow={tvShow} />
+      <TVShowHeader tvShow={tvShow} />
 
       <Grid container spacing={5} style={{ padding: "15px" }}>
         <Grid item xs={3}>
           <div className={classes.imageListRoot}>
             <ImageList rowHeight={500} className={classes.gridList} cols={1}>
-              {images.map((image) => (
-                <ImageListItem key={image.file_path} cols={1}>
-                  <img
-                    src={`https://image.tmdb.org/t/p/w500/${image.file_path}`}
-                    alt={image.poster_path}
-                  />
-                </ImageListItem>
-              ))}
+              <ImageListItem key={tvShow.poster_path} cols={1}>
+                <img
+                  src={`https://image.tmdb.org/t/p/w500/${tvShow.poster_path}`}
+                  alt={tvShow.poster_path}
+                />
+              </ImageListItem>
             </ImageList>
           </div>
         </Grid>

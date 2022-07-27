@@ -67,4 +67,4 @@ const TemplateShowPage = ({ show, children }) => {
   );
 };
 
-export default TemplateMoviePage;
+export default TemplateShowPage;
