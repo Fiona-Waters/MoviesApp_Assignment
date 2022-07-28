@@ -4,11 +4,14 @@ import { useQuery } from 'react-query';
 import Spinner from '../components/spinner';
 import {getActorMovies} from '../api/tmdb-api';
 import AddToFavouritesIcon from '../components/cardIcons/addToFavourites';
+import { useParams } from "react-router-dom";
 
 
-const HomePage = (props) => {
-  const {  data, error, isLoading, isError }  = useQuery('Actor Movies', getActorMovies)
-  console.log("actormovies", data)
+const ActorMovies = () => {
+  const { id } = useParams()
+  const {  data: movie, error, isLoading, isError }  = useQuery(["Actor Movies",{id: id}],
+   getActorMovies)
+  console.log("actormovies blah", movie)
   if (isLoading) {
     return <Spinner />
   }
@@ -16,7 +19,7 @@ const HomePage = (props) => {
   if (isError) {
     return <h1>{error.message}</h1>
   }  
-  const movies = data.results.map((movie) => {
+  const movies = movie.cast.map((movie) => {
     movie.type = "MOVIE";
     return movie;
   });
@@ -33,4 +36,4 @@ const HomePage = (props) => {
 );
 };
 
-export default HomePage;
+export default ActorMovies;

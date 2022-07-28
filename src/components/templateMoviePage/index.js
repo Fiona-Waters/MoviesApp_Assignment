@@ -29,7 +29,7 @@ const TemplateMoviePage = ({ movie, children }) => {
     ["images", { id: movie.id }],
     getMovieImages
   );
-
+console.log("movie", movie)
   if (isLoading) {
     return <Spinner />;
   }
@@ -47,14 +47,12 @@ const TemplateMoviePage = ({ movie, children }) => {
         <Grid item xs={3}>
           <div className={classes.imageListRoot}>
             <ImageList rowHeight={500} className={classes.gridList} cols={1}>
-              {images.map((image) => (
-                <ImageListItem key={image.file_path} cols={1}>
+                <ImageListItem key={movie.poster_path} cols={1}>
                   <img
-                    src={`https://image.tmdb.org/t/p/w500/${image.file_path}`}
-                    alt={image.poster_path}
+                    src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+                    alt={movie.poster_path}
                   />
                 </ImageListItem>
-              ))}
             </ImageList>
           </div>
         </Grid>
