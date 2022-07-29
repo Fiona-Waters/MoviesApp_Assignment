@@ -78,6 +78,16 @@ const ShowDetails = ( {show}) => {
         />
         <Chip label={`Released: ${show.release_date}`} />
       </Paper>
+      <Paper component="ul" className={classes.chipSet}>
+        <li>
+          <Chip label="Production Countries" className={classes.chipLabel} color="primary" />
+        </li>
+        {show.production_countries.map((p) => (
+          <li key={p.name}>
+            <Chip label={p.name} className={classes.chip} />
+          </li>
+        ))}
+      </Paper>
       </div>
       {/* New */}
       <Fab    
