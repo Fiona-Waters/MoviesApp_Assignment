@@ -6,7 +6,7 @@ import ImageList from "@material-ui/core/ImageList";
 import ImageListItem from "@material-ui/core/ImageListItem";
 import { getMovieImages } from "../../api/tmdb-api";
 import { useQuery } from "react-query";
-import Spinner from '../spinner';
+import Spinner from "../spinner";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -19,17 +19,17 @@ const useStyles = makeStyles((theme) => ({
   },
   imageList: {
     width: 450,
-    height: '100vh',
+    height: "100vh",
   },
 }));
 
 const TemplateMoviePage = ({ movie, children }) => {
   const classes = useStyles();
-  const { data , error, isLoading, isError } = useQuery(
+  const { data, error, isLoading, isError } = useQuery(
     ["images", { id: movie.id }],
     getMovieImages
   );
-console.log("movie", movie)
+
   if (isLoading) {
     return <Spinner />;
   }
@@ -37,7 +37,6 @@ console.log("movie", movie)
   if (isError) {
     return <h1>{error.message}</h1>;
   }
-  const images = data.posters 
 
   return (
     <div className={classes.root}>
@@ -47,12 +46,12 @@ console.log("movie", movie)
         <Grid item xs={3}>
           <div className={classes.imageListRoot}>
             <ImageList rowHeight={500} className={classes.gridList} cols={1}>
-                <ImageListItem key={movie.poster_path} cols={1}>
-                  <img
-                    src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
-                    alt={movie.poster_path}
-                  />
-                </ImageListItem>
+              <ImageListItem key={movie.poster_path} cols={1}>
+                <img
+                  src={`https://image.tmdb.org/t/p/w500/${movie.poster_path}`}
+                  alt={movie.poster_path}
+                />
+              </ImageListItem>
             </ImageList>
           </div>
         </Grid>
