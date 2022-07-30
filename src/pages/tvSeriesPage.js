@@ -20,6 +20,7 @@ const TvSeriesPage = (props) => {
   const tvShows = data.results.map((tvShow) => {
     tvShow.title = tvShow.name;
     tvShow.type = "TV_SHOW"
+    tvShow.release_date = tvShow.first_air_date;
     return tvShow;
   });
   

@@ -51,6 +51,8 @@ const FavouriteMoviesPage = () => {
 
   const tvShows = favouriteTvQueries.map((t) => {
     t.data.type = "TV_SHOW";
+    t.data.title = t.data.name;
+    t.data.release_date = t.data.first_air_date;
    // t.data.genre_ids = t.data.genres.map((g) => g.id);
     return t.data;
   })
@@ -60,14 +62,14 @@ const FavouriteMoviesPage = () => {
 
   return (
     <PageTemplate
-      title="Favourite Movies"
+      title="Favourite Movies & TV Shows"
       shows={allFavourites}
       action={(show) =>
       {
         return (
           <>
             <RemoveFromFavourites show={show} />
-            <WriteReview show={show} />
+            <WriteReview movie={show} />
           </>
         );
       }} 

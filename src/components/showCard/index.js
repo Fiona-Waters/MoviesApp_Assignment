@@ -26,13 +26,21 @@ const useStyles = makeStyles({
 
 export default function ShowCard({ show, action }) {
   const classes = useStyles();
-  const { favourites, mustWatch } = useContext(MoviesContext);
+  const { movieFavourites, tvFavourites, mustWatch } =
+    useContext(MoviesContext);
 
-  if (favourites.find((id) => id === show.id)) {
+  if (show.type === "MOVIE") {
+    if (movieFavourites.find((id) => id === show.id)) {
+      show.favourite = true;
+    } else {
+      show.favourite = false;
+    }
+  } else if (tvFavourites.find((id) => id === show.id)) {
     show.favourite = true;
   } else {
     show.favourite = false;
   }
+
   if (mustWatch.find((id) => id === show.id)) {
     show.watchList = true;
   } else {
