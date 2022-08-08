@@ -5,7 +5,7 @@ import PageTemplate from "../components/templateTvPage";
 import { getTVShow, getTVShowCredits } from "../api/tmdb-api";
 import { useQuery } from "react-query";
 import Spinner from "../components/spinner";
-import TvCast from "../tvCast";
+import TvCast from "../components/tvCast";
 
 const TVShowDetailsPage = () => {
   const { id } = useParams();
