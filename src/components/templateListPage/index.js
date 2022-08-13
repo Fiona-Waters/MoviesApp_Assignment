@@ -25,6 +25,8 @@ function ListPageTemplate({ shows, title, action }) {
   const classes = useStyles();
   const [titleFilter, setTitleFilter] = useState("");
   const [genreFilter, setGenreFilter] = useState("0");
+  const [certificationFilter, setCertificationFilter] = useState("G");
+  const [ languageFilter, setLanguageFilter] = useState("all");
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   const genreId = Number(genreFilter);
@@ -35,10 +37,19 @@ function ListPageTemplate({ shows, title, action }) {
     })
     .filter((s) => {
       return genreId > 0 ? s.genre_ids.includes(genreId) : true;
+    })
+    .filter((s) => {
+      //fix this
+      return certificationFilter !== "G" ? s.certification.toLowerCase().search(certificationFilter.toLowerCase()) !== -1 : true;
+    })
+    .filter((s) => {
+      return languageFilter !== "all" ? s.original_language.toLowerCase().search(languageFilter.toLowerCase()) !== -1 : true;
     });
 
   const handleChange = (type, value) => {
     if (type === "name") setTitleFilter(value);
+    else if (type === "certification") setCertificationFilter(value);
+    else if (type === "language") setLanguageFilter(value);
     else setGenreFilter(value);
   };
 
@@ -69,6 +80,8 @@ function ListPageTemplate({ shows, title, action }) {
           onUserInput={handleChange}
           titleFilter={titleFilter}
           genreFilter={genreFilter}
+          certificationFilter={certificationFilter}
+          languageFilter={languageFilter}
         />
       </Drawer>
     </>    

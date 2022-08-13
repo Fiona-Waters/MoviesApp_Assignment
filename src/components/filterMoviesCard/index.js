@@ -9,9 +9,13 @@ import TextField from "@material-ui/core/TextField";
 import SearchIcon from "@material-ui/icons/Search";
 import FormControl from "@material-ui/core/FormControl";
 import Select from "@material-ui/core/Select";
-import { getGenres } from "../../api/tmdb-api";
+import {
+  getGenres,
+  getLanguages,
+  getMovieCertifications,
+} from "../../api/tmdb-api";
 import { useQuery } from "react-query";
-import Spinner from '../spinner';
+import Spinner from "../spinner";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -29,7 +33,8 @@ const useStyles = makeStyles((theme) => ({
 export default function FilterMoviesCard(props) {
   const classes = useStyles();
   const { data, error, isLoading, isError } = useQuery("genres", getGenres);
-
+  const { data: info } = useQuery("certification", getMovieCertifications);
+  const { data: languages } = useQuery("language", getLanguages);
   if (isLoading) {
     return <Spinner />;
   }
@@ -38,9 +43,10 @@ export default function FilterMoviesCard(props) {
     return <h1>{error.message}</h1>;
   }
   const genres = data.genres;
-  if (genres[0].name !== "All"){
+  if (genres[0].name !== "All") {
     genres.unshift({ id: "0", name: "All" });
   }
+  const certifications = info?.certifications?.US;
 
   const handleChange = (e, type, value) => {
     e.preventDefault();
@@ -55,43 +61,88 @@ export default function FilterMoviesCard(props) {
     handleChange(e, "genre", e.target.value);
   };
 
+  const handleCertificationChange = (e, props) => {
+    handleChange(e, "certification", e.target.value);
+  };
+
+  const handleLanguageChange = (e, props) => {
+    handleChange(e, "language", e.target.value);
+  };
+
   return (
     <>
-    <Card className={classes.root} variant="outlined">
-      <CardContent>
-        <Typography variant="h5" component="h1">
-          <SearchIcon fontSize="large" />
-          Filter
-        </Typography>
-        <TextField
-          className={classes.formControl}
-          id="filled-search"
-          label="Search field"
-          type="search"
-          value={props.titleFilter}
-          variant="filled"
-          onChange={handleTextChange}
-        />
-        <FormControl className={classes.formControl}>
-          <InputLabel id="genre-label">Genre</InputLabel>
-          <Select
-            labelId="genre-label"
-            id="genre-select"
-            value={props.genreFilter}
-            onChange={handleGenreChange}
-          >
-            {genres.map((genre) => {
-              return (
-                <MenuItem key={genre.id} value={genre.id}>
-                  {genre.name}
-                </MenuItem>
-              );
-            })}
-          </Select>
-        </FormControl>
-      </CardContent>
-    </Card>
-    <Card className={classes.root} variant="outlined">
+      <Card className={classes.root} variant="outlined">
+        <CardContent>
+          <Typography variant="h5" component="h1">
+            <SearchIcon fontSize="large" />
+            Filter
+          </Typography>
+          <TextField
+            className={classes.formControl}
+            id="filled-search"
+            label="Search field"
+            type="search"
+            value={props.titleFilter}
+            variant="filled"
+            onChange={handleTextChange}
+          />
+          <FormControl className={classes.formControl}>
+            <InputLabel id="genre-label">Genre</InputLabel>
+            <Select
+              labelId="genre-label"
+              id="genre-select"
+              value={props.genreFilter}
+              onChange={handleGenreChange}
+            >
+              {genres.map((genre) => {
+                return (
+                  <MenuItem key={genre.id} value={genre.id}>
+                    {genre.name}
+                  </MenuItem>
+                );
+              })}
+            </Select>
+          </FormControl>
+          <FormControl className={classes.formControl}>
+            <InputLabel id="certification-label">Certification</InputLabel>
+            <Select
+              labelId="certification-label"
+              id="certification-select"
+              value={props.certificationFilter}
+              onChange={handleCertificationChange}
+            >
+              {certifications?.map((c) => {
+                return (
+                  <MenuItem key={c.certification} value={c.certification}>
+                    {c.certification}
+                  </MenuItem>
+                );
+              })}
+            </Select>
+          </FormControl>
+          <FormControl className={classes.formControl}>
+            <InputLabel id="certification-label">Language</InputLabel>
+            <Select
+              labelId="language-label"
+              id="language-select"
+              value={props.languageFilter}
+              onChange={handleLanguageChange}
+            >
+              <MenuItem key={""} value={"all"}>
+                All
+              </MenuItem>
+              {languages?.map((l) => {
+                return (
+                  <MenuItem key={l.iso_639_1} value={l.iso_639_1}>
+                    {l.english_name}
+                  </MenuItem>
+                );
+              })}
+            </Select>
+          </FormControl>
+        </CardContent>
+      </Card>
+      <Card className={classes.root} variant="outlined">
         <CardContent>
           <Typography variant="h5" component="h1">
             <SearchIcon fontSize="large" />
@@ -99,6 +150,6 @@ export default function FilterMoviesCard(props) {
           </Typography>
         </CardContent>
       </Card>
-      </>
+    </>
   );
 }

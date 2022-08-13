@@ -11,7 +11,6 @@ const ActorMovies = () => {
   const { id } = useParams()
   const {  data: movie, error, isLoading, isError }  = useQuery(["Actor Movies",{id: id}],
    getActorMovies)
-  console.log("actormovies blah", movie)
   if (isLoading) {
     return <Spinner />
   }
