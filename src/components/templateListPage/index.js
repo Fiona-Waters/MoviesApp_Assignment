@@ -5,7 +5,6 @@ import Grid from "@material-ui/core/Grid";
 import Fab from "@material-ui/core/Fab";
 import Drawer from "@material-ui/core/Drawer";
 import { makeStyles } from "@material-ui/core/styles";
-// import MovieList from "../movieList";
 import ShowList from "../showList";
 
 const useStyles = makeStyles((theme) =>  ({
@@ -27,6 +26,7 @@ function ListPageTemplate({ shows, title, action }) {
   const [genreFilter, setGenreFilter] = useState("0");
   const [certificationFilter, setCertificationFilter] = useState("G");
   const [ languageFilter, setLanguageFilter] = useState("all");
+  const [ voteAverageFilter, setVoteAverageFilter] = useState(-1)
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   const genreId = Number(genreFilter);
@@ -44,12 +44,16 @@ function ListPageTemplate({ shows, title, action }) {
     })
     .filter((s) => {
       return languageFilter !== "all" ? s.original_language.toLowerCase().search(languageFilter.toLowerCase()) !== -1 : true;
-    });
+    })
+    .filter((s) => {
+      return s.vote_average >= voteAverageFilter;
+    });    
 
   const handleChange = (type, value) => {
     if (type === "name") setTitleFilter(value);
     else if (type === "certification") setCertificationFilter(value);
     else if (type === "language") setLanguageFilter(value);
+    else if (type === "vote average") setVoteAverageFilter(value);
     else setGenreFilter(value);
   };
 
@@ -82,6 +86,7 @@ function ListPageTemplate({ shows, title, action }) {
           genreFilter={genreFilter}
           certificationFilter={certificationFilter}
           languageFilter={languageFilter}
+          voteAverageFilter={voteAverageFilter}
         />
       </Drawer>
     </>    

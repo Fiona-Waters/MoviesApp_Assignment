@@ -1,8 +1,9 @@
 export const getMovies = (args) => {
-  const [, certificationPart] = args.queryKey;
-  const { certification } = certificationPart;
+ // const [, certificationPart] = args.queryKey;
+ // const { certification } = certificationPart;
   return fetch(
-    `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&include_adult=false&include_video=false&page=1&certification=${certification}&certification_country=US`
+//  `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&include_adult=false&include_video=false&page=1&certification=${certification}&certification_country=US`
+    `https://api.themoviedb.org/3/discover/movie?api_key=${process.env.REACT_APP_TMDB_KEY}&language=en-US&include_adult=false&include_video=false&page=1`
   )
     .then((response) => {
       if (!response.ok) {

@@ -69,6 +69,10 @@ export default function FilterMoviesCard(props) {
     handleChange(e, "language", e.target.value);
   };
 
+  const handleVoteAverageChange = (e) => {
+    handleChange(e, "vote average", e.target.value)
+  }
+
   return (
     <>
       <Card className={classes.root} variant="outlined">
@@ -138,6 +142,26 @@ export default function FilterMoviesCard(props) {
                   </MenuItem>
                 );
               })}
+            </Select>
+          </FormControl>
+          <FormControl className={classes.formControl}>
+            <InputLabel id="vote-average-label">Vote Average</InputLabel>
+            <Select
+              labelId="vote-average-label"
+              id="vote average"
+              value={props.voteAverageFilter}
+              onChange={handleVoteAverageChange}
+            >
+               <option value="-1">All</option>
+               <option value="1"> 1+</option>
+               <option value="2"> 2+</option>
+               <option value="3"> 3+</option>
+               <option value="4"> 4+</option>
+               <option value="5"> 5+</option>
+               <option value="6"> 6+</option>
+               <option value="7"> 7+</option>
+               <option value="8"> 8+</option>
+               <option value="9"> 9+</option>
             </Select>
           </FormControl>
         </CardContent>
