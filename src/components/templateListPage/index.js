@@ -25,8 +25,10 @@ function ListPageTemplate({ shows, title, action }) {
   const [titleFilter, setTitleFilter] = useState("");
   const [genreFilter, setGenreFilter] = useState("0");
   const [certificationFilter, setCertificationFilter] = useState("G");
-  const [ languageFilter, setLanguageFilter] = useState("all");
-  const [ voteAverageFilter, setVoteAverageFilter] = useState(-1)
+  const [languageFilter, setLanguageFilter] = useState("all");
+  const [voteAverageFilter, setVoteAverageFilter] = useState(-1);
+  const [checkedTitle, setCheckedTitle] = useState(false);
+  const [checkedReleaseDate, setCheckedReleaseDate] = useState(false);
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   const genreId = Number(genreFilter);
@@ -40,34 +42,52 @@ function ListPageTemplate({ shows, title, action }) {
     })
     .filter((s) => {
       //fix this
-      return certificationFilter !== "G" ? s.certification.toLowerCase().search(certificationFilter.toLowerCase()) !== -1 : true;
+      return certificationFilter !== "G"
+        ? s.certification
+            .toLowerCase()
+            .search(certificationFilter.toLowerCase()) !== -1
+        : true;
     })
     .filter((s) => {
-      return languageFilter !== "all" ? s.original_language.toLowerCase().search(languageFilter.toLowerCase()) !== -1 : true;
+      return languageFilter !== "all"
+        ? s.original_language
+            .toLowerCase()
+            .search(languageFilter.toLowerCase()) !== -1
+        : true;
     })
     .filter((s) => {
       return s.vote_average >= voteAverageFilter;
-    });    
+    });
+
+  // add sorting
+  if (checkedTitle === true) {
+    displayedShows.sort((a, b) => a.title > b.title ? 1 : -1);
+  } else if (checkedReleaseDate === true) {
+    displayedShows.sort((a, b) => new Date(...a.release_date.split('/').reverse()) - new Date(...b.release_date.split('/').reverse()));
+  }
 
   const handleChange = (type, value) => {
+  
     if (type === "name") setTitleFilter(value);
     else if (type === "certification") setCertificationFilter(value);
     else if (type === "language") setLanguageFilter(value);
     else if (type === "vote average") setVoteAverageFilter(value);
+    else if (type === "sortTitle") setCheckedTitle(value);
+    else if (type === "sortReleaseDate") setCheckedReleaseDate(value);
     else setGenreFilter(value);
   };
 
   return (
     <>
-    <Grid container className={classes.root}>
-      <Grid item xs={12}>
-        <Header title={title} />
+      <Grid container className={classes.root}>
+        <Grid item xs={12}>
+          <Header title={title} />
+        </Grid>
+        <Grid item container spacing={5}>
+          <ShowList action={action} shows={displayedShows} />
+        </Grid>
       </Grid>
-      <Grid item container spacing={5}>
-        <ShowList action={action} shows={displayedShows} />
-      </Grid>
-    </Grid>
-    <Fab
+      <Fab
         color="secondary"
         variant="extended"
         onClick={() => setDrawerOpen(true)}
@@ -87,9 +107,11 @@ function ListPageTemplate({ shows, title, action }) {
           certificationFilter={certificationFilter}
           languageFilter={languageFilter}
           voteAverageFilter={voteAverageFilter}
+          checkedTitle={checkedTitle}
+          checkedReleaseDate={checkedReleaseDate}
         />
       </Drawer>
-    </>    
+    </>
   );
 }
 export default ListPageTemplate;

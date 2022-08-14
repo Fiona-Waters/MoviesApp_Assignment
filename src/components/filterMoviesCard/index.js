@@ -8,6 +8,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import TextField from "@material-ui/core/TextField";
 import SearchIcon from "@material-ui/icons/Search";
 import FormControl from "@material-ui/core/FormControl";
+import { Checkbox, FormControlLabel, FormGroup } from "@material-ui/core";
 import Select from "@material-ui/core/Select";
 import {
   getGenres,
@@ -70,8 +71,16 @@ export default function FilterMoviesCard(props) {
   };
 
   const handleVoteAverageChange = (e) => {
-    handleChange(e, "vote average", e.target.value)
-  }
+    handleChange(e, "vote average", e.target.value);
+  };
+
+  const handleSortTitleChange = (e) => {
+   handleChange(e, "sortTitle", e.target.checked)
+  };
+
+  const handleSortReleaseDateChange = (e) => {
+    handleChange(e, "sortReleaseDate", e.target.checked)
+   };
 
   return (
     <>
@@ -152,16 +161,16 @@ export default function FilterMoviesCard(props) {
               value={props.voteAverageFilter}
               onChange={handleVoteAverageChange}
             >
-               <option value="-1">All</option>
-               <option value="1"> 1+</option>
-               <option value="2"> 2+</option>
-               <option value="3"> 3+</option>
-               <option value="4"> 4+</option>
-               <option value="5"> 5+</option>
-               <option value="6"> 6+</option>
-               <option value="7"> 7+</option>
-               <option value="8"> 8+</option>
-               <option value="9"> 9+</option>
+              <option value="-1">All</option>
+              <option value="1"> 1+</option>
+              <option value="2"> 2+</option>
+              <option value="3"> 3+</option>
+              <option value="4"> 4+</option>
+              <option value="5"> 5+</option>
+              <option value="6"> 6+</option>
+              <option value="7"> 7+</option>
+              <option value="8"> 8+</option>
+              <option value="9"> 9+</option>
             </Select>
           </FormControl>
         </CardContent>
@@ -171,6 +180,11 @@ export default function FilterMoviesCard(props) {
           <Typography variant="h5" component="h1">
             <SearchIcon fontSize="large" />
             Sort
+            <h6>Please check one box only</h6>
+            <FormGroup>
+              <FormControlLabel control={<Checkbox onChange={handleSortTitleChange} />} label="By Title Alphabetical"/>
+              <FormControlLabel control={<Checkbox onChange={handleSortReleaseDateChange} />} label="By Release Date"/>
+            </FormGroup>
           </Typography>
         </CardContent>
       </Card>
