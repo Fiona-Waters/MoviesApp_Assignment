@@ -41,7 +41,7 @@ const TemplateShowPage = ({ show, children }) => {
 
   return (
     <div className={classes.root}>
-      <MovieHeader movie={movie} />
+      <MovieHeader movie={show} />
 
       <Grid container spacing={5} style={{ padding: "15px" }}>
         <Grid item xs={3}>
