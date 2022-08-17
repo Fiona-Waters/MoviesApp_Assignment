@@ -14,6 +14,7 @@ import { useNavigate } from "react-router-dom";
 import Header from "../headerMovieList";
 import { getGenres, getActors } from "../../api/tmdb-api";
 import DatePicker from "react-multi-date-picker";
+import Multiselect from "multiselect-react-dropdown";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -44,15 +45,13 @@ const useStyles = makeStyles((theme) => ({
 
 const FantasyMovieForm = (props) => {
   const { data } = useQuery("genres", getGenres);
-  const {  data: actors,  }  = useQuery('actors', getActors)
-  console.log(props);
-  console.log("data", data);
+  const { data: actors } = useQuery("actors", getActors);
   const genres = data?.genres;
   const actorList = actors?.results;
   const classes = useStyles();
   const { register, handleSubmit, errors, reset } = useForm();
   const context = useContext(MoviesContext);
-  const [genre, setGenre] = useState("All");
+  const [genre, setGenre] = useState("");
   const [actor, setActor] = useState("");
   const [value, setValue] = useState(new Date());
   // get list of genres, like in filter
@@ -64,10 +63,10 @@ const FantasyMovieForm = (props) => {
 
   const handleActorChange = (event) => {
     setActor(event.target.value);
-  }
+  };
 
   const handleSnackClose = (e) => {
-    StereoPannerNode(false);
+   // setOpen(false);
     navigate("/my-fantasy-movie");
   };
 
@@ -95,30 +94,20 @@ const FantasyMovieForm = (props) => {
             variant="outlined"
             margin="normal"
             required
-            id="" // what to use as id?
             label="Movie Title"
             name="title"
             autoFocus
             inputRef={register({ required: "Movie Title Required" })}
           />
           &nbsp; &nbsp; &nbsp;
-          <TextField
-            id="select-rating"
-            select
-            variant="outlined"
-            label="Genre Select"
-            value={genre}
+          <Multiselect
+            options={genres}
             onChange={handleGenreChange}
-            helperText="Don't forget your genre"
-          >
-            {genres?.map((genre) => {
-              return (
-                <MenuItem key={genre.id} value={genre.id}>
-                  {genre.name}
-                </MenuItem>
-              );
-            })}
-          </TextField>
+            showCheckbox="true"
+            placeholder="Choose Genres"
+            isObject="true"
+            displayValue="name"
+          />
           <br></br>
           Please Choose Your Release Date
           <br></br>
@@ -148,24 +137,44 @@ const FantasyMovieForm = (props) => {
               minLength: { value: 10, message: "Plot is too short" },
             })}
           />
-        </form>
-        <TextField
-            id="select-rating"
-            select
+          <TextField
+            className={classes.textField}
             variant="outlined"
-            label="Actor Select"
-            value={actor}
-            onChange={handleActorChange}
-            helperText="Don't forget your actors"
-          >
-            {actorList?.map((actor) => {
-              return (
-                <MenuItem key={actor.name} value={actor.name}>
-                  {actor.name}
-                </MenuItem>
-              );
-            })}
-          </TextField>
+            margin="normal"
+            required
+            label="Character Name"
+            name="character name"
+            autoFocus
+          />
+          <TextField
+            className={classes.textField}
+            variant="outlined"
+            margin="normal"
+            required
+            label="Character Role"
+            name="character role"
+            autoFocus
+          />
+          <TextField
+          id="select-rating"
+          select
+          variant="outlined"
+          label="Actor Select"
+          value={actor}
+          onChange={handleActorChange}
+          helperText="Add an actor here"
+          style={{ width: 200 }}
+        >
+          {actorList?.map((actor) => {
+            return (
+              <MenuItem key={actor.name} value={actor.name}>
+                {actor.name}
+              </MenuItem>
+            );
+          })}
+        </TextField>
+        </form>
+        
       </Box>
     </>
   );
