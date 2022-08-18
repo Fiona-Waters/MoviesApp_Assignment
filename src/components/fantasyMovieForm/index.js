@@ -5,7 +5,7 @@ import TextField from "@material-ui/core/TextField";
 import Typography from "@material-ui/core/Typography";
 import { makeStyles } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
-import { useForm } from "react-hook-form";
+import { Controller, useForm } from "react-hook-form";
 import { MoviesContext } from "../../contexts/moviesContext";
 import MenuItem from "@material-ui/core/MenuItem";
 import Snackbar from "@material-ui/core/Snackbar";
@@ -18,13 +18,14 @@ import Multiselect from "multiselect-react-dropdown";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    marginTop: theme.spacing(2),
+    marginTop: theme.spacing(1),
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
   },
   form: {
     width: "100%",
+    background: "white",
     "& > * ": {
       marginTop: theme.spacing(2),
     },
@@ -49,39 +50,22 @@ const FantasyMovieForm = (props) => {
   const genres = data?.genres;
   const actorList = actors?.results;
   const classes = useStyles();
-  const { register, handleSubmit, errors, reset } = useForm();
+  const { register, handleSubmit, errors, reset, control } = useForm();
   const context = useContext(MoviesContext);
   const [genre, setGenre] = useState("");
   const [actor, setActor] = useState("");
   const [value, setValue] = useState(new Date());
-  // get list of genres, like in filter
   const navigate = useNavigate();
-
-  const handleGenreChange = (event) => {
-    setGenre(event.target.value);
-  };
-
-  const handleActorChange = (event) => {
-    setActor(event.target.value);
-  };
-
-  const handleSnackClose = (e) => {
-   // setOpen(false);
-    navigate("/my-fantasy-movie");
-  };
 
   const onSubmit = (fantasyMovie) => {
     console.log(fantasyMovie);
-    // what else to include here?
-    // context.addFantasyMovie create this func and call it here
-    //  setOpen(true);
+    context.addFantasyMovie(fantasyMovie);
   };
 
   return (
     <>
-      <Header title={"Create Your Own Fantasy Movie"} />
       <Box component="div" className={classes.root}>
-        <Typography component="h2" variant="h3">
+        <Typography component="h4" variant="h5">
           Create Your Own Fantasy Movie
         </Typography>
         <form
@@ -99,20 +83,6 @@ const FantasyMovieForm = (props) => {
             autoFocus
             inputRef={register({ required: "Movie Title Required" })}
           />
-          &nbsp; &nbsp; &nbsp;
-          <Multiselect
-            options={genres}
-            onChange={handleGenreChange}
-            showCheckbox="true"
-            placeholder="Choose Genres"
-            isObject="true"
-            displayValue="name"
-          />
-          <br></br>
-          Please Choose Your Release Date
-          <br></br>
-          <DatePicker title="Release Date" value={value} onChange={setValue} />
-          <br></br>
           <TextField
             className={classes.textField}
             variant="outlined"
@@ -121,60 +91,74 @@ const FantasyMovieForm = (props) => {
             label="Budget"
             name="budget"
             autoFocus
+            inputRef={register({ required: "Budget Required" })}
           />
+          <br></br>
+          <p>
+            Release Date &nbsp;
+            <Controller
+              control={control}
+              name="releaseDate"
+              defaultValue={new Date()}
+              render={({ value, onChange }) => {
+                return (
+                  <DatePicker
+                    autoFocus
+                    title="Release Date"
+                    name="releaseDate"
+                    value={value}
+                    onChange={onChange}
+                  />
+                );
+              }}
+            />
+          </p>
           <TextField
             variant="outlined"
             margin="normal"
             required
-            fullWidth
-            name="content"
+            name="plot"
             label="Movie plot"
-            id="content"
             multiline
+            fullWidth
             minRows={10}
             inputRef={register({
               required: "No plot info provided",
               minLength: { value: 10, message: "Plot is too short" },
             })}
           />
-          <TextField
-            className={classes.textField}
-            variant="outlined"
-            margin="normal"
-            required
-            label="Character Name"
-            name="character name"
-            autoFocus
+          &nbsp; &nbsp; &nbsp;
+          <Controller
+          //  will this work for multiple genres, and actors?
+              control={control}
+              name="releaseDate"
+              defaultValue={new Date()}
+              render={({ value, onChange }) => {
+                return (
+                    <Multiselect
+                    options={genres}
+                    onChange={onChange}
+                    value={value}
+                    name="genres"
+                    showCheckbox="true"
+                    placeholder="Choose Genres"
+                    isObject="true"
+                    displayValue="name"
+                  />
+                );
+              }}
+            />
+          
+          <Multiselect
+            options={actorList}
+          //  onChange={handleActorChange}
+            showCheckbox="true"
+            placeholder="Choose Actors"
+            isObject="true"
+            displayValue="name"
           />
-          <TextField
-            className={classes.textField}
-            variant="outlined"
-            margin="normal"
-            required
-            label="Character Role"
-            name="character role"
-            autoFocus
-          />
-          <TextField
-          id="select-rating"
-          select
-          variant="outlined"
-          label="Actor Select"
-          value={actor}
-          onChange={handleActorChange}
-          helperText="Add an actor here"
-          style={{ width: 200 }}
-        >
-          {actorList?.map((actor) => {
-            return (
-              <MenuItem key={actor.name} value={actor.name}>
-                {actor.name}
-              </MenuItem>
-            );
-          })}
-        </TextField>
+          <button type="submit">Submit</button>
         </form>
-        
       </Box>
     </>
   );

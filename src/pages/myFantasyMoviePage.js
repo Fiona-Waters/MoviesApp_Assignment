@@ -1,18 +1,38 @@
-import React, { useReducer } from "react";
-import { useForm } from "react-hook-form";
+import React from "react";
 import FantasyMovieForm from "../components/fantasyMovieForm";
+import Header from "../components/headerMovieList";
+import { makeStyles } from "@material-ui/core/styles";
+import Grid from "@material-ui/core/Grid";
 
-console.log("hello");
+const useStyles = makeStyles((theme) =>  ({
+  root: {
+    backgroundColor: "#bfbfbf",
+    paddingTop: theme.spacing(7),
+  },
+  fab: {
+    marginTop: theme.spacing(8),
+    position: "fixed",
+    top: theme.spacing(2),
+    right: theme.spacing(2),
+  },
+}));
+
 const FantasyMoviePage = (props) => {
-  const { register, handleSubmit } = useForm();
-  const onSubmit = (data) => console.log(data);
+  const classes = useStyles();
+ 
+ 
+
   return (
-    < FantasyMovieForm />
+    <>
+        <Grid container className={classes.root}>
+        <Grid item xs={12}>
+          <Header title={"My Fantasy Movie"} />
+          <FantasyMovieForm/>
+        </Grid>
+      </Grid>
+    </>
   );
 };
 
 export default FantasyMoviePage;
 
-// display fantasy movies, like movie cards? upload an image?
-// have form component on the same page? when you submit it updates?
-// or have a link to the form here and make another page for the form?
