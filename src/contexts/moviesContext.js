@@ -33,8 +33,8 @@ const MoviesContextProvider = (props) => {
     setMyReviews( {...myReviews, [movie.id]: review} )
   };
 
-  const addFantasyMovie = (fantasyMovie) => {
-    setFantasyMovie(fantasyMovie)
+  const addFantasyMovie = (movie) => {
+    setFantasyMovie([...fantasyMovie, movie])
   }
 
   const addToMustWatchList = (movie) => {
@@ -54,6 +54,7 @@ const MoviesContextProvider = (props) => {
         mustWatch,
         movieFavourites,
         tvFavourites,
+        fantasyMovie,
         addToFavourites,
         removeFromFavourites,
         addReview,

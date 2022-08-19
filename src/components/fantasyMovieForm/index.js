@@ -7,14 +7,11 @@ import { makeStyles } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
 import { Controller, useForm } from "react-hook-form";
 import { MoviesContext } from "../../contexts/moviesContext";
-import MenuItem from "@material-ui/core/MenuItem";
-import Snackbar from "@material-ui/core/Snackbar";
-import MuiAlert from "@material-ui/lab/Alert";
 import { useNavigate } from "react-router-dom";
-import Header from "../headerMovieList";
 import { getGenres, getActors } from "../../api/tmdb-api";
-import DatePicker from "react-multi-date-picker";
+import DatePicker, { DateObject } from "react-multi-date-picker";
 import Multiselect from "multiselect-react-dropdown";
+import FantasyMovieList from "../fantasyMovieList";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -50,12 +47,8 @@ const FantasyMovieForm = (props) => {
   const genres = data?.genres;
   const actorList = actors?.results;
   const classes = useStyles();
-  const { register, handleSubmit, errors, reset, control } = useForm();
+  const { register, handleSubmit, reset, control } = useForm();
   const context = useContext(MoviesContext);
-  const [genre, setGenre] = useState("");
-  const [actor, setActor] = useState("");
-  const [value, setValue] = useState(new Date());
-  const navigate = useNavigate();
 
   const onSubmit = (fantasyMovie) => {
     console.log(fantasyMovie);
@@ -64,6 +57,7 @@ const FantasyMovieForm = (props) => {
 
   return (
     <>
+      <FantasyMovieList fantasyMovie={context.fantasyMovie} />
       <Box component="div" className={classes.root}>
         <Typography component="h4" variant="h5">
           Create Your Own Fantasy Movie
@@ -99,7 +93,7 @@ const FantasyMovieForm = (props) => {
             <Controller
               control={control}
               name="releaseDate"
-              defaultValue={new Date()}
+              defaultValue={new DateObject()}
               render={({ value, onChange }) => {
                 return (
                   <DatePicker
@@ -129,35 +123,67 @@ const FantasyMovieForm = (props) => {
           />
           &nbsp; &nbsp; &nbsp;
           <Controller
-          //  will this work for multiple genres, and actors?
-              control={control}
-              name="releaseDate"
-              defaultValue={new Date()}
-              render={({ value, onChange }) => {
-                return (
-                    <Multiselect
-                    options={genres}
-                    onChange={onChange}
-                    value={value}
-                    name="genres"
-                    showCheckbox="true"
-                    placeholder="Choose Genres"
-                    isObject="true"
-                    displayValue="name"
-                  />
-                );
-              }}
-            />
-          
-          <Multiselect
-            options={actorList}
-          //  onChange={handleActorChange}
-            showCheckbox="true"
-            placeholder="Choose Actors"
-            isObject="true"
-            displayValue="name"
+            control={control}
+            name="genre"
+            defaultValue={""}
+            render={({ value, onChange }) => {
+              return (
+                <Multiselect
+                  options={genres}
+                  onSelect={onChange}
+                  selectedValues={value}
+                  name="genres"
+                  showCheckbox="true"
+                  placeholder="Choose Genres"
+                  isObject="true"
+                  displayValue="name"
+                />
+              );
+            }}
           />
-          <button type="submit">Submit</button>
+          <Controller
+            control={control}
+            name="actor"
+            defaultValue={""}
+            render={({ value, onChange }) => {
+              return (
+                <Multiselect
+                  options={actorList}
+                  onSelect={onChange}
+                  selectedValues={value}
+                  name="actors"
+                  showCheckbox="true"
+                  placeholder="Choose Actors"
+                  isObject="true"
+                  displayValue="name"
+                />
+              );
+            }}
+          />
+          <Box className={classes.buttons}>
+            <Button
+              type="submit"
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+            >
+              Submit
+            </Button>
+            <Button
+              type="reset"
+              variant="contained"
+              color="secondary"
+              className={classes.submit}
+              onClick={() => {
+                reset({
+                  author: "",
+                  content: "",
+                });
+              }}
+            >
+              Reset
+            </Button>
+          </Box>{" "}
         </form>
       </Box>
     </>
