@@ -12,6 +12,7 @@ import { getGenres, getActors } from "../../api/tmdb-api";
 import DatePicker, { DateObject } from "react-multi-date-picker";
 import Multiselect from "multiselect-react-dropdown";
 import FantasyMovieList from "../fantasyMovieList";
+import { addFantasyMovieToFirebase } from "../../firebase";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -53,6 +54,7 @@ const FantasyMovieForm = (props) => {
   const onSubmit = (fantasyMovie) => {
     console.log(fantasyMovie);
     context.addFantasyMovie(fantasyMovie);
+    addFantasyMovieToFirebase(fantasyMovie);
   };
 
   return (
