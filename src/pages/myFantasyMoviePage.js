@@ -4,7 +4,7 @@ import Header from "../components/headerMovieList";
 import { makeStyles } from "@material-ui/core/styles";
 import Grid from "@material-ui/core/Grid";
 
-const useStyles = makeStyles((theme) =>  ({
+const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: "#bfbfbf",
     paddingTop: theme.spacing(7),
@@ -19,15 +19,13 @@ const useStyles = makeStyles((theme) =>  ({
 
 const FantasyMoviePage = (props) => {
   const classes = useStyles();
- 
- 
 
   return (
     <>
-        <Grid container className={classes.root}>
+      <Grid container className={classes.root}>
         <Grid item xs={12}>
           <Header title={"My Fantasy Movie"} />
-          <FantasyMovieForm/>
+          <FantasyMovieForm />
         </Grid>
       </Grid>
     </>
@@ -35,4 +33,3 @@ const FantasyMoviePage = (props) => {
 };
 
 export default FantasyMoviePage;
-

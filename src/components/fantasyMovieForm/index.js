@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext } from "react";
 import { useQuery } from "react-query";
 import Button from "@material-ui/core/Button";
 import TextField from "@material-ui/core/TextField";
@@ -7,12 +7,13 @@ import { makeStyles } from "@material-ui/core/styles";
 import Box from "@material-ui/core/Box";
 import { Controller, useForm } from "react-hook-form";
 import { MoviesContext } from "../../contexts/moviesContext";
-import { useNavigate } from "react-router-dom";
 import { getGenres, getActors } from "../../api/tmdb-api";
 import DatePicker, { DateObject } from "react-multi-date-picker";
 import Multiselect from "multiselect-react-dropdown";
 import FantasyMovieList from "../fantasyMovieList";
-import { addFantasyMovieToFirebase } from "../../firebase";
+import { addFantasyMovieToFirebase, db } from "../../firebase";
+import { collection } from "firebase/firestore";
+import { useCollectionData } from "react-firebase-hooks/firestore";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -50,6 +51,7 @@ const FantasyMovieForm = (props) => {
   const classes = useStyles();
   const { register, handleSubmit, reset, control } = useForm();
   const context = useContext(MoviesContext);
+  const [fantasyMovies] = useCollectionData(collection(db, "fantasyMovies"));
 
   const onSubmit = (fantasyMovie) => {
     console.log(fantasyMovie);
@@ -59,7 +61,7 @@ const FantasyMovieForm = (props) => {
 
   return (
     <>
-      <FantasyMovieList fantasyMovie={context.fantasyMovie} />
+      <FantasyMovieList fantasyMovie={fantasyMovies} />
       <Box component="div" className={classes.root}>
         <Typography component="h4" variant="h5">
           Create Your Own Fantasy Movie
@@ -90,7 +92,7 @@ const FantasyMovieForm = (props) => {
             inputRef={register({ required: "Budget Required" })}
           />
           <br></br>
-          <p>
+          <div>
             Release Date &nbsp;
             <Controller
               control={control}
@@ -108,7 +110,7 @@ const FantasyMovieForm = (props) => {
                 );
               }}
             />
-          </p>
+          </div>
           <TextField
             variant="outlined"
             margin="normal"
