@@ -1,21 +1,20 @@
 import React from "react";
 import PageTemplate from "../components/templateActorListPage";
-import { useQuery } from 'react-query';
-import Spinner from '../components/spinner';
-import {getActors} from '../api/tmdb-api';
-
+import { useQuery } from "react-query";
+import Spinner from "../components/spinner";
+import { getActors } from "../api/tmdb-api";
 
 const ActorPage = (props) => {
-  const {  data, error, isLoading, isError }  = useQuery('actors', getActors)
-  console.log("Actor data", data)
+  const { data, error, isLoading, isError } = useQuery("actors", getActors);
+  console.log("Actor data", data);
 
   if (isLoading) {
-    return <Spinner />
+    return <Spinner />;
   }
 
   if (isError) {
-    return <h1>{error.message}</h1>
-  }  
+    return <h1>{error.message}</h1>;
+  }
   const actors = data.results.map((actor) => {
     return actor;
   });
@@ -26,7 +25,7 @@ const ActorPage = (props) => {
       actors={actors}
       action={(actor) => null}
     />
-);
+  );
 };
 
 export default ActorPage;

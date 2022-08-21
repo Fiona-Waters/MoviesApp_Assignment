@@ -4,9 +4,9 @@ import { useLocation, Navigate } from "react-router-dom";
 import { auth } from "./firebase";
 
 const ProtectedRoute = ({ children }) => {
-  const [ loggedInUser ] = useAuthState(auth);
+  const [loggedInUser] = useAuthState(auth);
   const location = useLocation();
-  console.log(location)
+  console.log(location);
   if (!loggedInUser) {
     return <Navigate to={"/login"} replace state={{ intent: location }} />;
   }

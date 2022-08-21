@@ -50,10 +50,15 @@ const FantasyMovieForm = (props) => {
   const genres = data?.genres;
   const actorList = actors?.results;
   const classes = useStyles();
-  const [ loggedInUser ] = useAuthState(auth);
+  const [loggedInUser] = useAuthState(auth);
   const { register, handleSubmit, reset, control } = useForm();
   const context = useContext(MoviesContext);
-  const [fantasyMovies] = useCollectionData(query(collection(db, "fantasyMovies"), where("uid", "==", loggedInUser?.uid || null)));
+  const [fantasyMovies] = useCollectionData(
+    query(
+      collection(db, "fantasyMovies"),
+      where("uid", "==", loggedInUser?.uid || null)
+    )
+  );
 
   const onSubmit = (fantasyMovie) => {
     console.log(fantasyMovie);

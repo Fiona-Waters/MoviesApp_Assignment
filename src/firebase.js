@@ -17,11 +17,11 @@ export const auth = getAuth(app);
 
 export const addFantasyMovieToFirebase = async (fantasyMovie) => {
   const user = auth.currentUser;
-  console.log("user", user)
+  console.log("user", user);
   if (user !== null) {
     user.providerData.forEach((profile) => {
-      console.log("uid", profile.uid)
-    })
+      console.log("uid", profile.uid);
+    });
   }
   try {
     const docRef = await addDoc(collection(db, "fantasyMovies"), {

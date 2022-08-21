@@ -30,15 +30,16 @@ const useStyles = makeStyles((theme) => ({
   chipLabel: {
     margin: theme.spacing(0.5),
   },
-  fab: {  //New
+  fab: {
+    //New
     position: "fixed",
     top: theme.spacing(15),
     right: theme.spacing(2),
   },
 }));
 
-const ActorDetails = ( {actor}) => {
-const classes = useStyles();
+const ActorDetails = ({ actor }) => {
+  const classes = useStyles();
 
   return (
     <>
@@ -50,20 +51,15 @@ const classes = useStyles();
         {actor.biography}
       </Typography>
       <div className={classes.chipRoot}>
-      
-      <Paper component="ul" className={classes.chipSet}>
-        <Chip icon={< Face/>} label={`${actor.name}`} />
+        <Paper component="ul" className={classes.chipSet}>
+          <Chip icon={<Face />} label={`${actor.name}`} />
 
-        <Chip
-          icon={<Cake />}
-          label={`${actor.birthday}` } 
-        />
-        <Chip icon={<Work />} label={`${actor.known_for_department}`} />
-      </Paper>
+          <Chip icon={<Cake />} label={`${actor.birthday}`} />
+          <Chip icon={<Work />} label={`${actor.known_for_department}`} />
+        </Paper>
       </div>
       {/* New */}
-      
     </>
   );
 };
-export default  ActorDetails;
+export default ActorDetails;

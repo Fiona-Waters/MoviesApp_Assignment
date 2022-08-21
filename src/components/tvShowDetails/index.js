@@ -29,15 +29,16 @@ const useStyles = makeStyles((theme) => ({
   chipLabel: {
     margin: theme.spacing(0.5),
   },
-  fab: {  //New
+  fab: {
+    //New
     position: "fixed",
     top: theme.spacing(15),
     right: theme.spacing(2),
   },
 }));
 
-const TvShowDetails = ( {tvShow}) => {
-const classes = useStyles();
+const TvShowDetails = ({ tvShow }) => {
+  const classes = useStyles();
 
   return (
     <>
@@ -49,39 +50,46 @@ const classes = useStyles();
         {tvShow.overview}
       </Typography>
       <div className={classes.chipRoot}>
-      <Paper component="ul" className={classes.chipSet}>
-        <li>
-          <Chip label="Genres" className={classes.chipLabel} color="primary" />
-        </li>
-        {tvShow.genres.map((g) => (
-          <li key={g.name}>
-            <Chip label={g.name} className={classes.chip} />
+        <Paper component="ul" className={classes.chipSet}>
+          <li>
+            <Chip
+              label="Genres"
+              className={classes.chipLabel}
+              color="primary"
+            />
           </li>
-        ))}
-      </Paper>
-      <Paper component="ul" className={classes.chipSet}>
-        <Chip label={`Episodes: ${tvShow.number_of_episodes}`} />
+          {tvShow.genres.map((g) => (
+            <li key={g.name}>
+              <Chip label={g.name} className={classes.chip} />
+            </li>
+          ))}
+        </Paper>
+        <Paper component="ul" className={classes.chipSet}>
+          <Chip label={`Episodes: ${tvShow.number_of_episodes}`} />
 
-        <Chip
-          
-          label={`First Aired: ${tvShow.first_air_date}` } 
-        />
-        <Chip icon={<AccessTimeIcon />} label={`${tvShow.episode_run_time} min`} />
-      </Paper>
-      <Paper component="ul" className={classes.chipSet}>
-        <li>
-          <Chip label="Production Countries" className={classes.chipLabel} color="primary" />
-        </li>
-        {tvShow.production_countries.map((p) => (
-          <li key={p.name}>
-            <Chip label={p.name} className={classes.chip} />
+          <Chip label={`First Aired: ${tvShow.first_air_date}`} />
+          <Chip
+            icon={<AccessTimeIcon />}
+            label={`${tvShow.episode_run_time} min`}
+          />
+        </Paper>
+        <Paper component="ul" className={classes.chipSet}>
+          <li>
+            <Chip
+              label="Production Countries"
+              className={classes.chipLabel}
+              color="primary"
+            />
           </li>
-        ))}
-      </Paper>
+          {tvShow.production_countries.map((p) => (
+            <li key={p.name}>
+              <Chip label={p.name} className={classes.chip} />
+            </li>
+          ))}
+        </Paper>
       </div>
       {/* New */}
-      
     </>
   );
 };
-export default  TvShowDetails;
+export default TvShowDetails;

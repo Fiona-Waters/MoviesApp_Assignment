@@ -32,7 +32,9 @@ const FantasyMovieList = ({ fantasyMovie }) => {
               <TableRow>
                 <TableCell align="left">{m?.title}</TableCell>
                 <TableCell align="left">{m?.budget}</TableCell>
-                <TableCell align="left">{m?.releaseDate?.toDate().toLocaleDateString()}</TableCell>
+                <TableCell align="left">
+                  {m?.releaseDate?.toDate().toLocaleDateString()}
+                </TableCell>
                 <TableCell align="left">{m?.plot}</TableCell>
 
                 <TableCell align="left">

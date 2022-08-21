@@ -7,7 +7,6 @@ import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import { useNavigate } from "react-router-dom";
 
-
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
@@ -28,16 +27,18 @@ const ActorHeader = (props) => {
 
   return (
     <Paper component="div" className={classes.root}>
-      <IconButton aria-label="go back"  onClick={() => navigate(-1)}>
+      <IconButton aria-label="go back" onClick={() => navigate(-1)}>
         <ArrowBackIcon color="primary" fontSize="large" />
       </IconButton>
 
       <Typography variant="h4" component="h3">
         {actor.name}
         <br />
-        <span className={classes.tagLine}>{`   "${actor.place_of_birth}"`} </span>
+        <span className={classes.tagLine}>
+          {`   "${actor.place_of_birth}"`}{" "}
+        </span>
       </Typography>
-      <IconButton aria-label="go forward"  onClick={() => navigate(1)}>
+      <IconButton aria-label="go forward" onClick={() => navigate(1)}>
         <ArrowForwardIcon color="primary" fontSize="large" />
       </IconButton>
     </Paper>

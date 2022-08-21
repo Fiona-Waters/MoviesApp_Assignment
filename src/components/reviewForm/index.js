@@ -7,9 +7,9 @@ import Box from "@material-ui/core/Box";
 import { useForm } from "react-hook-form";
 import { MoviesContext } from "../../contexts/moviesContext";
 import MenuItem from "@material-ui/core/MenuItem";
-import Snackbar from "@material-ui/core/Snackbar"; 
+import Snackbar from "@material-ui/core/Snackbar";
 import MuiAlert from "@material-ui/lab/Alert";
-import {useNavigate} from 'react-router-dom';
+import { useNavigate } from "react-router-dom";
 
 const ratings = [
   {
@@ -56,7 +56,7 @@ const useStyles = makeStyles((theme) => ({
   snack: {
     width: "50%",
     "& > * ": {
-     width: "100%",
+      width: "100%",
     },
   },
 }));
@@ -67,7 +67,7 @@ const ReviewForm = ({ movie }) => {
   const context = useContext(MoviesContext);
   const [rating, setRating] = useState(3);
   const [open, setOpen] = useState(false);
-  const navigate = useNavigate()
+  const navigate = useNavigate();
 
   const handleRatingChange = (event) => {
     setRating(event.target.value);
@@ -76,8 +76,7 @@ const ReviewForm = ({ movie }) => {
   const handleSnackClose = (event) => {
     setOpen(false);
     navigate("/movies/favourites");
-};
-
+  };
 
   const onSubmit = (review) => {
     review.movieId = movie.id;

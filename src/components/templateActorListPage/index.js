@@ -7,7 +7,7 @@ import Drawer from "@material-ui/core/Drawer";
 import { makeStyles } from "@material-ui/core/styles";
 import ActorList from "../actorList";
 
-const useStyles = makeStyles((theme) =>  ({
+const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: "#bfbfbf",
     paddingTop: theme.spacing(7),
@@ -23,15 +23,14 @@ const useStyles = makeStyles((theme) =>  ({
 function ActorListPageTemplate({ actors, title, action }) {
   const classes = useStyles();
   const [nameFilter, setNameFilter] = useState("");
- // const [genreFilter, setGenreFilter] = useState("0");
+  // const [genreFilter, setGenreFilter] = useState("0");
   const [drawerOpen, setDrawerOpen] = useState(false);
 
- // const genreId = Number(genreFilter);
+  // const genreId = Number(genreFilter);
 
-  let displayedActors = actors
-    .filter((a) => {
-      return a.name.toLowerCase().search(nameFilter.toLowerCase()) !== -1;
-    })
+  let displayedActors = actors.filter((a) => {
+    return a.name.toLowerCase().search(nameFilter.toLowerCase()) !== -1;
+  });
 
   const handleChange = (type, value) => {
     if (type === "name") setNameFilter(value);
@@ -39,15 +38,15 @@ function ActorListPageTemplate({ actors, title, action }) {
 
   return (
     <>
-    <Grid container className={classes.root}>
-      <Grid item xs={12}>
-        <Header title={title} />
+      <Grid container className={classes.root}>
+        <Grid item xs={12}>
+          <Header title={title} />
+        </Grid>
+        <Grid item container spacing={5}>
+          <ActorList action={action} actors={displayedActors} />
+        </Grid>
       </Grid>
-      <Grid item container spacing={5}>
-        <ActorList action={action} actors={displayedActors} />
-      </Grid>
-    </Grid>
-    <Fab
+      <Fab
         color="secondary"
         variant="extended"
         onClick={() => setDrawerOpen(true)}
@@ -60,12 +59,9 @@ function ActorListPageTemplate({ actors, title, action }) {
         open={drawerOpen}
         onClose={() => setDrawerOpen(false)}
       >
-        <FilterCard
-          onUserInput={handleChange}
-          titleFilter={nameFilter}
-        />
+        <FilterCard onUserInput={handleChange} titleFilter={nameFilter} />
       </Drawer>
-    </>    
+    </>
   );
 }
 export default ActorListPageTemplate;

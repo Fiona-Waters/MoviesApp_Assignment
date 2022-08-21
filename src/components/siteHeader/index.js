@@ -20,21 +20,21 @@ const useStyles = makeStyles((theme) => ({
     // background: 'none',
   },
   inactiveLink: {
-    color: 'white',
-    padding : theme.spacing(1),
-    fontSize: '1.5rem'
+    color: "white",
+    padding: theme.spacing(1),
+    fontSize: "1.5rem",
   },
   activeLink: {
-    color: 'black',
-    padding : theme.spacing(1),
-    fontSize: '1.5rem',
-    background: "#bfbfbf"
-  }
+    color: "black",
+    padding: theme.spacing(1),
+    fontSize: "1.5rem",
+    background: "#bfbfbf",
+  },
 }));
 
 const SiteHeader = () => {
   const classes = useStyles();
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const [anchorEl, setAnchorEl] = useState(null);
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down("md"));
@@ -47,7 +47,7 @@ const SiteHeader = () => {
     { label: "Must Watch", path: "/must-watch" },
     { label: "TV Series", path: "/tv-series" },
     { label: "Actors", path: "/actors" },
-    { label: "Fantasy Movie", path: "/my-fantasy-movie"},
+    { label: "Fantasy Movie", path: "/my-fantasy-movie" },
   ];
 
   const handleMenuSelect = (pageURL) => {
@@ -58,10 +58,14 @@ const SiteHeader = () => {
     setAnchorEl(event.currentTarget);
   };
 
-  return ( 
+  return (
     <>
-      <AppBar className={classes.appbar}
-      position="fixed" elevation={0} color='primary'> 
+      <AppBar
+        className={classes.appbar}
+        position="fixed"
+        elevation={0}
+        color="primary"
+      >
         <Toolbar>
           <Typography variant="h4" className={classes.title}>
             TMDB Client
@@ -112,13 +116,13 @@ const SiteHeader = () => {
                   key={opt.label}
                   to={opt.path}
                   className={({ isActive }) =>
-                  isActive ? classes.activeLink : classes.inactiveLink
-                }
+                    isActive ? classes.activeLink : classes.inactiveLink
+                  }
                   color="inherit"
                   // onClick={() => handleMenuSelect(opt.path)}
                 >
                   {opt.label}
-                </NavLink> 
+                </NavLink>
               ))}
             </>
           )}

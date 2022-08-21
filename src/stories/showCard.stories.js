@@ -6,22 +6,22 @@ import MoviesContextProvider from "../contexts/moviesContext";
 import AddToFavouritesIcon from "../components/cardIcons/addToFavourites";
 
 export default {
-    title: "Show Page/Show Card",
-    component: TvShowCard,
-    decorators: [
-        (Story) => <MemoryRouter initialEntries={["/"]}>{Story()}</MemoryRouter>,
-        (Story) => <MoviesContextProvider>{Story()}</MoviesContextProvider>,
-      ],
+  title: "Show Page/Show Card",
+  component: TvShowCard,
+  decorators: [
+    (Story) => <MemoryRouter initialEntries={["/"]}>{Story()}</MemoryRouter>,
+    (Story) => <MoviesContextProvider>{Story()}</MoviesContextProvider>,
+  ],
 };
 
 export const Basic = () => {
-    return (
-        <TvShowCard
-        show={(sampleTV)}
-        action={(tvShow) => <AddToFavouritesIcon tvShow={tvShow}/>}
-        taging={(tvShow) => null}
-        />
-    );
+  return (
+    <TvShowCard
+      show={sampleTV}
+      action={(tvShow) => <AddToFavouritesIcon tvShow={tvShow} />}
+      taging={(tvShow) => null}
+    />
+  );
 };
 
 Basic.storyName = "Default";

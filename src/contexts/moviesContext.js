@@ -6,10 +6,10 @@ const MoviesContextProvider = (props) => {
   const [movieFavourites, setMovieFavourites] = useState([]);
   const [tvFavourites, setTvFavourites] = useState([]);
   const [myReviews, setMyReviews] = useState([]);
-  const [mustWatch, setMustWatch ] = useState([]);
+  const [mustWatch, setMustWatch] = useState([]);
   const [fantasyMovie, setFantasyMovie] = useState([]);
-  console.log('Must Watch Array', mustWatch);
-  console.log("fantasy movie", fantasyMovie)
+  console.log("Must Watch Array", mustWatch);
+  console.log("fantasy movie", fantasyMovie);
 
   const addToFavourites = (show) => {
     if (show.type === "MOVIE") {
@@ -25,28 +25,28 @@ const MoviesContextProvider = (props) => {
     if (show.type === "MOVIE") {
       setMovieFavourites(movieFavourites.filter((mId) => mId !== show.id));
     } else {
-    setTvFavourites(tvFavourites.filter((mId) => mId !== show.id));
+      setTvFavourites(tvFavourites.filter((mId) => mId !== show.id));
     }
   };
 
   const addReview = (movie, review) => {
-    setMyReviews( {...myReviews, [movie.id]: review} )
+    setMyReviews({ ...myReviews, [movie.id]: review });
   };
 
   const addFantasyMovie = (movie) => {
-    setFantasyMovie([...fantasyMovie, movie])
-  }
+    setFantasyMovie([...fantasyMovie, movie]);
+  };
 
   const addToMustWatchList = (movie) => {
-      if (!mustWatch.includes(movie.id)) {
-        let newMustWatch = [...mustWatch, movie.id];
-        setMustWatch(newMustWatch)
-      }
+    if (!mustWatch.includes(movie.id)) {
+      let newMustWatch = [...mustWatch, movie.id];
+      setMustWatch(newMustWatch);
+    }
   };
 
   const removeFromMustWatch = (movie) => {
     setMustWatch(mustWatch.filter((mId) => mId !== movie.id));
-  }
+  };
 
   return (
     <MoviesContext.Provider

@@ -10,8 +10,8 @@ import WriteReview from "../components/cardIcons/writeReview";
 const FavouriteMoviesPage = () => {
   const { movieFavourites, tvFavourites } = useContext(MoviesContext);
 
- console.log("moviefavourites", movieFavourites)
- console.log("tvfavourites", tvFavourites)
+  console.log("moviefavourites", movieFavourites);
+  console.log("tvfavourites", tvFavourites);
   // Create an array of queries and run in parallel.
   const favouriteMovieQueries = useQueries(
     movieFavourites.map((movieId) => {
@@ -25,7 +25,7 @@ const FavouriteMoviesPage = () => {
   const favouriteTvQueries = useQueries(
     tvFavourites.map((tvId) => {
       return {
-        queryKey: ["tv", {id: tvId}],
+        queryKey: ["tv", { id: tvId }],
         queryFn: getTVShow,
       };
     })
@@ -53,26 +53,25 @@ const FavouriteMoviesPage = () => {
     t.data.type = "TV_SHOW";
     t.data.title = t.data.name;
     t.data.release_date = t.data.first_air_date;
-   // t.data.genre_ids = t.data.genres.map((g) => g.id);
+    // t.data.genre_ids = t.data.genres.map((g) => g.id);
     return t.data;
-  })
+  });
 
   const allFavourites = movies.concat(tvShows);
-  console.log("all favourites", allFavourites)
+  console.log("all favourites", allFavourites);
 
   return (
     <PageTemplate
       title="Favourite Movies & TV Shows"
       shows={allFavourites}
-      action={(show) =>
-      {
+      action={(show) => {
         return (
           <>
             <RemoveFromFavourites show={show} />
             <WriteReview movie={show} />
           </>
         );
-      }} 
+      }}
     />
   );
 };

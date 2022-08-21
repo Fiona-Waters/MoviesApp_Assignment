@@ -7,7 +7,7 @@ import Drawer from "@material-ui/core/Drawer";
 import { makeStyles } from "@material-ui/core/styles";
 import ShowList from "../showList";
 
-const useStyles = makeStyles((theme) =>  ({
+const useStyles = makeStyles((theme) => ({
   root: {
     backgroundColor: "#bfbfbf",
     paddingTop: theme.spacing(7),
@@ -61,13 +61,16 @@ function ListPageTemplate({ shows, title, action }) {
 
   // add sorting
   if (checkedTitle === true) {
-    displayedShows.sort((a, b) => a.title > b.title ? 1 : -1);
+    displayedShows.sort((a, b) => (a.title > b.title ? 1 : -1));
   } else if (checkedReleaseDate === true) {
-    displayedShows.sort((a, b) => new Date(...a.release_date.split('/').reverse()) - new Date(...b.release_date.split('/').reverse()));
+    displayedShows.sort(
+      (a, b) =>
+        new Date(...a.release_date.split("/").reverse()) -
+        new Date(...b.release_date.split("/").reverse())
+    );
   }
 
   const handleChange = (type, value) => {
-  
     if (type === "name") setTitleFilter(value);
     else if (type === "certification") setCertificationFilter(value);
     else if (type === "language") setLanguageFilter(value);

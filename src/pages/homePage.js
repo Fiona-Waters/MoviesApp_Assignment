@@ -7,9 +7,11 @@ import AddToFavouritesIcon from "../components/cardIcons/addToFavourites";
 
 const HomePage = (props) => {
   const { data, error, isLoading, isError } = useQuery(
-    // figure out how to get certification! 
-    ["discover", {certification: ""}], getMovies);
-  
+    // figure out how to get certification!
+    ["discover", { certification: "" }],
+    getMovies
+  );
+
   if (isLoading) {
     return <Spinner />;
   }

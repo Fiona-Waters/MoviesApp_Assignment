@@ -10,7 +10,7 @@ import { makeStyles } from "@material-ui/core/styles";
 import NavigationIcon from "@material-ui/icons/Navigation";
 import Fab from "@material-ui/core/Fab";
 import Drawer from "@material-ui/core/Drawer";
-import MovieReviews from '../movieReviews'
+import MovieReviews from "../movieReviews";
 
 const useStyles = makeStyles((theme) => ({
   chipRoot: {
@@ -35,14 +35,15 @@ const useStyles = makeStyles((theme) => ({
   chipLabel: {
     margin: theme.spacing(0.5),
   },
-  fab: {  //New
+  fab: {
+    //New
     position: "fixed",
     top: theme.spacing(15),
     right: theme.spacing(2),
   },
 }));
 
-const ShowDetails = ( {show}) => {
+const ShowDetails = ({ show }) => {
   const classes = useStyles();
   const [drawerOpen, setDrawerOpen] = useState(false); // New
 
@@ -56,53 +57,65 @@ const ShowDetails = ( {show}) => {
         {show.overview}
       </Typography>
       <div className={classes.chipRoot}>
-      <Paper component="ul" className={classes.chipSet}>
-        <li>
-          <Chip label="Genres" className={classes.chipLabel} color="primary" />
-        </li>
-        {show.genres.map((g) => (
-          <li key={g.name}>
-            <Chip label={g.name} className={classes.chip} />
+        <Paper component="ul" className={classes.chipSet}>
+          <li>
+            <Chip
+              label="Genres"
+              className={classes.chipLabel}
+              color="primary"
+            />
           </li>
-        ))}
-      </Paper>
-      <Paper component="ul" className={classes.chipSet}>
-        <Chip icon={<AccessTimeIcon />} label={`${show.runtime} min.`} />
-        <Chip
-          icon={<MonetizationIcon />}
-          label={`${show.revenue.toLocaleString()}`}
-        />
-        <Chip
-          icon={<StarRate />}
-          label={`${show.vote_average} (${show.vote_count}`}
-        />
-        <Chip label={`Released: ${show.release_date}`} />
-      </Paper>
-      <Paper component="ul" className={classes.chipSet}>
-        <li>
-          <Chip label="Production Countries" className={classes.chipLabel} color="primary" />
-        </li>
-        {show.production_countries.map((p) => (
-          <li key={p.name}>
-            <Chip label={p.name} className={classes.chip} />
+          {show.genres.map((g) => (
+            <li key={g.name}>
+              <Chip label={g.name} className={classes.chip} />
+            </li>
+          ))}
+        </Paper>
+        <Paper component="ul" className={classes.chipSet}>
+          <Chip icon={<AccessTimeIcon />} label={`${show.runtime} min.`} />
+          <Chip
+            icon={<MonetizationIcon />}
+            label={`${show.revenue.toLocaleString()}`}
+          />
+          <Chip
+            icon={<StarRate />}
+            label={`${show.vote_average} (${show.vote_count}`}
+          />
+          <Chip label={`Released: ${show.release_date}`} />
+        </Paper>
+        <Paper component="ul" className={classes.chipSet}>
+          <li>
+            <Chip
+              label="Production Countries"
+              className={classes.chipLabel}
+              color="primary"
+            />
           </li>
-        ))}
-      </Paper>
+          {show.production_countries.map((p) => (
+            <li key={p.name}>
+              <Chip label={p.name} className={classes.chip} />
+            </li>
+          ))}
+        </Paper>
       </div>
       {/* New */}
-      <Fab    
+      <Fab
         color="secondary"
         variant="extended"
-        onClick={() =>setDrawerOpen(true)}
+        onClick={() => setDrawerOpen(true)}
         className={classes.fab}
       >
         <NavigationIcon />
         Reviews
       </Fab>
-      <Drawer anchor="top" open={drawerOpen} onClose={() => setDrawerOpen(false)}>
+      <Drawer
+        anchor="top"
+        open={drawerOpen}
+        onClose={() => setDrawerOpen(false)}
+      >
         <MovieReviews movie={show} />
       </Drawer>
     </>
   );
 };
-export default  ShowDetails ;
+export default ShowDetails;

@@ -7,7 +7,6 @@ import IconButton from "@material-ui/core/IconButton";
 import Typography from "@material-ui/core/Typography";
 import { useNavigate } from "react-router-dom";
 
-
 const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
@@ -25,10 +24,10 @@ const TVShowHeader = (props) => {
   const navigate = useNavigate();
   const classes = useStyles();
   const tvShow = props.tvShow;
-console.log(tvShow)
+  console.log(tvShow);
   return (
     <Paper component="div" className={classes.root}>
-      <IconButton aria-label="go back"  onClick={() => navigate(-1)}>
+      <IconButton aria-label="go back" onClick={() => navigate(-1)}>
         <ArrowBackIcon color="primary" fontSize="large" />
       </IconButton>
 
@@ -37,7 +36,7 @@ console.log(tvShow)
         <br />
         <span className={classes.tagLine}>{`   "${tvShow.tagline}"`} </span>
       </Typography>
-      <IconButton aria-label="go forward"  onClick={() => navigate(1)}>
+      <IconButton aria-label="go forward" onClick={() => navigate(1)}>
         <ArrowForwardIcon color="primary" fontSize="large" />
       </IconButton>
     </Paper>

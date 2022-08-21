@@ -1,23 +1,26 @@
 import React from "react";
 import PageTemplate from "../components/templateListPage";
-import { useQuery } from 'react-query';
-import Spinner from '../components/spinner';
-import {getActorMovies} from '../api/tmdb-api';
-import AddToFavouritesIcon from '../components/cardIcons/addToFavourites';
+import { useQuery } from "react-query";
+import Spinner from "../components/spinner";
+import { getActorMovies } from "../api/tmdb-api";
+import AddToFavouritesIcon from "../components/cardIcons/addToFavourites";
 import { useParams } from "react-router-dom";
 
-
 const ActorMovies = () => {
-  const { id } = useParams()
-  const {  data: movie, error, isLoading, isError }  = useQuery(["Actor Movies",{id: id}],
-   getActorMovies)
+  const { id } = useParams();
+  const {
+    data: movie,
+    error,
+    isLoading,
+    isError,
+  } = useQuery(["Actor Movies", { id: id }], getActorMovies);
   if (isLoading) {
-    return <Spinner />
+    return <Spinner />;
   }
 
   if (isError) {
-    return <h1>{error.message}</h1>
-  }  
+    return <h1>{error.message}</h1>;
+  }
   const movies = movie.cast.map((movie) => {
     movie.type = "MOVIE";
     return movie;
@@ -28,11 +31,10 @@ const ActorMovies = () => {
       title="Actor Movies"
       shows={movies}
       action={(movie) => {
-        return <AddToFavouritesIcon show={movie} />
+        return <AddToFavouritesIcon show={movie} />;
       }}
-
     />
-);
+  );
 };
 
 export default ActorMovies;

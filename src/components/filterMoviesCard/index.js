@@ -75,12 +75,12 @@ export default function FilterMoviesCard(props) {
   };
 
   const handleSortTitleChange = (e) => {
-   handleChange(e, "sortTitle", e.target.checked)
+    handleChange(e, "sortTitle", e.target.checked);
   };
 
   const handleSortReleaseDateChange = (e) => {
-    handleChange(e, "sortReleaseDate", e.target.checked)
-   };
+    handleChange(e, "sortReleaseDate", e.target.checked);
+  };
 
   return (
     <>
@@ -182,8 +182,14 @@ export default function FilterMoviesCard(props) {
             Sort
             <h6>Please check one box only</h6>
             <FormGroup>
-              <FormControlLabel control={<Checkbox onChange={handleSortTitleChange} />} label="By Title Alphabetical"/>
-              <FormControlLabel control={<Checkbox onChange={handleSortReleaseDateChange} />} label="By Release Date"/>
+              <FormControlLabel
+                control={<Checkbox onChange={handleSortTitleChange} />}
+                label="By Title Alphabetical"
+              />
+              <FormControlLabel
+                control={<Checkbox onChange={handleSortReleaseDateChange} />}
+                label="By Release Date"
+              />
             </FormGroup>
           </Typography>
         </CardContent>
