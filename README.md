@@ -1,34 +1,60 @@
 
 # ICT Skills 2 Assignment.
 
-Name: [your name]
+Name: Fiona Waters
 
 ## Overview.
+A React.js Web Application allowing anyone to view popular and up to date movies and tv shows as well as actors. Movies and TV shows can be favourited and/or added to a must watch list. A logged-in user can access the Fantasy Movie feature, favourites and must watch list.
 
-[ A paragraph on your React app's concept followed by a bullet-point list of its feature set - only list new/modified features if you are expanding the Movies app. ]
+Added Features
++ TV Series Page
+    + TV Series Details Page with new Cast Details component.
+    + Cast Name links to Actor's Bio page (hyperlinking).
++ Actors Page (hyperlinking)
+    + Actor Bio Page
+    + Actor Movies Page
++ Fantasy Movie Page
+    + Fantasy Movie List
+    + Fantasy Movie Form
++ Must Watch Page
++ Cast Details Component added to Movie Details Page (hyperlinking).
++ Use of 17 TMDB API Endpoints.
++ Routing - 9 static and 5 parameterised routes. 3 of these are protected routes.
++ Extended Filtering adding language and vote average.
++ Sorting by Title Alphabetical and by Release Date.
++ Full Caching
++ Firebase Authentication
++ Server-side persistence. User and My Fantasy Movie stored in Firebase Firestore Database.
++ Storybook Support
++ Third party components used: 
+    + react-multi-date-picker for Release Date in My Fantasy Movie Feature.
+    + multiselect-react-dropdown for Drop Down Menus in My Fantasy Movie Feature.
+    + react-firebase-hooks for authentication.
 
-e.g. 
-+ Feature 1
-+ Feature 2
-+ Feature 3
-+ etc
-+ etc
 
 ## Setup requirements.
-
-[ Briefly state (to a third party) the setup steps necessary to run your app/client locally, e.g. .env and any other config files.]
++ Clone this repo.
++ Open it in your IDE. 
++ run `npm install` 
++ sign up for a TMDB account [here](https://www.themoviedb.org/signup), go to settings and an API key. Add this to a .env file which you will add to the base folder of the application. Set `REACT_APP_TMDB_KEY=` variable to this value.
++ run `npm run start to run application on local host 3000`
++ run `npm run storybook to run storybook on local host 6006`
 
 ## App Design.
 
 ### Routing/Navigation.
 
-[List the set of routes your app supports - only mention new instances if you expanded the Movies Fan app. State the view linked with each route.] 
+Routes added:
 
-e.g.
-+ /movies/:id - detailed information on a specific movie.
-+ /movies/upcoming - lists movies soon to be shown in cinemas.
-+ etc.
-+ etc.
++ /tv-series - lists popular tv series.
++ /tv_shows/:id - shows more details on selected tv show.
++ /actors - lists popular actors.
++ /actor/:id - shows more details on selected actor.
++ /actor/:id/movies - shows movies that selected actor stars in.
++ /must-watch - shows must watch list. (This is a protected route.)
++ /my-fantasy-movie - shows list of users fantasy movies if any, and a form to add a fantasy movie. (This is a protected route.)
++ /login - page rendered when non-loggedin user clicks on protected routes, allows user to log in with email and password.
+
 
 ### Views/Pages.
 
