@@ -11,9 +11,10 @@ import { getGenres, getActors } from "../../api/tmdb-api";
 import DatePicker, { DateObject } from "react-multi-date-picker";
 import Multiselect from "multiselect-react-dropdown";
 import FantasyMovieList from "../fantasyMovieList";
-import { addFantasyMovieToFirebase, db } from "../../firebase";
-import { collection } from "firebase/firestore";
+import { addFantasyMovieToFirebase, auth, db } from "../../firebase";
+import { collection, query, where } from "firebase/firestore";
 import { useCollectionData } from "react-firebase-hooks/firestore";
+import { useAuthState } from "react-firebase-hooks/auth";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -49,9 +50,10 @@ const FantasyMovieForm = (props) => {
   const genres = data?.genres;
   const actorList = actors?.results;
   const classes = useStyles();
+  const [ loggedInUser ] = useAuthState(auth);
   const { register, handleSubmit, reset, control } = useForm();
   const context = useContext(MoviesContext);
-  const [fantasyMovies] = useCollectionData(collection(db, "fantasyMovies"));
+  const [fantasyMovies] = useCollectionData(query(collection(db, "fantasyMovies"), where("uid", "==", loggedInUser?.uid)));
 
   const onSubmit = (fantasyMovie) => {
     console.log(fantasyMovie);

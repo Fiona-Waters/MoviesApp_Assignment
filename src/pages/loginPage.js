@@ -96,6 +96,7 @@ const LoginPage = () => {
             variant="outlined"
             margin="normal"
             required
+            type="password"
             label="Password"
             name="password"
             inputRef={register({ required: "Password Required" })}

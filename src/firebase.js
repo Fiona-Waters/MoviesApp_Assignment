@@ -16,8 +16,16 @@ export const db = getFirestore(app);
 export const auth = getAuth(app);
 
 export const addFantasyMovieToFirebase = async (fantasyMovie) => {
+  const user = auth.currentUser;
+  console.log("user", user)
+  if (user !== null) {
+    user.providerData.forEach((profile) => {
+      console.log("uid", profile.uid)
+    })
+  }
   try {
     const docRef = await addDoc(collection(db, "fantasyMovies"), {
+      uid: user.uid,
       title: fantasyMovie.title,
       budget: fantasyMovie.budget,
       releaseDate: fantasyMovie?.releaseDate?.toDate(),
