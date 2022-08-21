@@ -22,33 +22,33 @@ export default function ActorCard({ actor, action }) {
   return (
     <Card className={classes.card}>
       <CardHeader
-      className={classes.header}
-      title={
-        <Typography variant="h5" component="p">
-          {actor.name}{" "}
-        </Typography>
-      }
-    />
+        className={classes.header}
+        title={
+          <Typography variant="h5" component="p">
+            {actor.name}{" "}
+          </Typography>
+        }
+      />
       <CardMedia
         className={classes.media}
         image={
-            actor.profile_path
+          actor.profile_path
             ? `https://image.tmdb.org/t/p/w500/${actor.profile_path}`
             : `${process.env.PUBLIC_URL}/assets/film-poster-placeholder.png`
         }
       />
-    
+
       <CardActions disableSpacing>
         {action(actor)}
         <Link to={`/actor/${actor.id}`}>
           <Button variant="outlined" size="medium" color="primary">
-            Actor Bio ...
+            Actor Bio
           </Button>
         </Link>
         {action(actor)}
         <Link to={`/actor/${actor.id}/movies`}>
           <Button variant="outlined" size="medium" color="primary">
-            Actor Movies ...
+            Actor Movies
           </Button>
         </Link>
       </CardActions>

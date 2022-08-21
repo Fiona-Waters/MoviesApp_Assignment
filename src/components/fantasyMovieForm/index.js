@@ -53,7 +53,7 @@ const FantasyMovieForm = (props) => {
   const [ loggedInUser ] = useAuthState(auth);
   const { register, handleSubmit, reset, control } = useForm();
   const context = useContext(MoviesContext);
-  const [fantasyMovies] = useCollectionData(query(collection(db, "fantasyMovies"), where("uid", "==", loggedInUser?.uid)));
+  const [fantasyMovies] = useCollectionData(query(collection(db, "fantasyMovies"), where("uid", "==", loggedInUser?.uid || null)));
 
   const onSubmit = (fantasyMovie) => {
     console.log(fantasyMovie);

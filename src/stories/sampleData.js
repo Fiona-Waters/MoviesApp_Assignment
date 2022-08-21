@@ -1,3 +1,5 @@
+import { Timestamp } from "firebase/firestore";
+
 export const SampleMovie = {
   adult: false,
   backdrop_path: "/5Iw7zQTHVRBOYpA0V6z0yypOPZh.jpg",
@@ -80,78 +82,197 @@ export const SampleMovie = {
 };
 
 export const sampleTV = {
-  
-    adult: false,
-    backdrop_path: null,
-    created_by: [
-      
-    ],
-    episode_run_time: [
-      
-    ],
-    first_air_date: "2022-07-01",
-    genres: [
-      
-    ],
-    homepage: "",
-    id: 206114,
-    in_production: true,
-    languages: [
-      
-    ],
-    last_air_date: "2022-07-01",
-    last_episode_to_air: {
-      air_date: "2022-07-01",
-      episode_number: 1,
-      id: 3837921,
-      name: "Episode 1",
-      overview: "",
-      production_code: "",
-      runtime: null,
-      season_number: 1,
-      show_id: 206114,
-      still_path: null,
-      vote_average: 0.0,
-      vote_count: 0
-    },
-    name: "Curso PEIF SME SP Pré-Edital 2022",
-    next_episode_to_air: null,
-    networks: [
-      
-    ],
-    number_of_episodes: 1,
-    number_of_seasons: 1,
-    origin_country: [
-      "BR"
-    ],
-    original_language: "pt",
-    original_name: "Curso PEIF SME SP Pré-Edital 2022",
+  adult: false,
+  backdrop_path: null,
+  created_by: [],
+  episode_run_time: [],
+  first_air_date: "2022-07-01",
+  genres: [],
+  homepage: "",
+  id: 206114,
+  in_production: true,
+  languages: [],
+  last_air_date: "2022-07-01",
+  last_episode_to_air: {
+    air_date: "2022-07-01",
+    episode_number: 1,
+    id: 3837921,
+    name: "Episode 1",
     overview: "",
-    popularity: 0.0,
-    poster_path: "/jmBHrdK6KtqlTopGrqJuoE22Lsu.jpg",
-    production_companies: [
-      
-    ],
-    production_countries: [
-      
-    ],
-    seasons: [
-      {
-        air_date: "2022-07-01",
-        episode_count: 1,
-        id: 300974,
-        name: "Season 1",
-        overview: "",
-        poster_path: null,
-        season_number: 1
-      }
-    ],
-    spoken_languages: [
-      
-    ],
-    status: "Returning Series",
-    tagline: "",
-    type: "Scripted",
+    production_code: "",
+    runtime: null,
+    season_number: 1,
+    show_id: 206114,
+    still_path: null,
     vote_average: 0.0,
-    vote_count: 0
+    vote_count: 0,
+  },
+  name: "Curso PEIF SME SP Pré-Edital 2022",
+  next_episode_to_air: null,
+  networks: [],
+  number_of_episodes: 1,
+  number_of_seasons: 1,
+  origin_country: ["BR"],
+  original_language: "pt",
+  original_name: "Curso PEIF SME SP Pré-Edital 2022",
+  overview: "",
+  popularity: 0.0,
+  poster_path: "/jmBHrdK6KtqlTopGrqJuoE22Lsu.jpg",
+  production_companies: [],
+  production_countries: [],
+  seasons: [
+    {
+      air_date: "2022-07-01",
+      episode_count: 1,
+      id: 300974,
+      name: "Season 1",
+      overview: "",
+      poster_path: null,
+      season_number: 1,
+    },
+  ],
+  spoken_languages: [],
+  status: "Returning Series",
+  tagline: "",
+  type: "Scripted",
+  vote_average: 0.0,
+  vote_count: 0,
+};
+
+export const sampleCast = {
+  id: 616037,
+  cast: [
+    {
+      adult: false,
+      gender: 2,
+      id: 74568,
+      known_for_department: "Acting",
+      name: "Chris Hemsworth",
+      original_name: "Chris Hemsworth",
+      popularity: 114.157,
+      profile_path: "/jpurJ9jAcLCYjgHHfYF32m3zJYm.jpg",
+      cast_id: 85,
+      character: "Thor Odinson",
+      credit_id: "62c8c25290b87e00f53973fb",
+      order: 0,
+    },
+    {
+      adult: false,
+      gender: 2,
+      id: 3894,
+      known_for_department: "Acting",
+      name: "Christian Bale",
+      original_name: "Christian Bale",
+      popularity: 31.81,
+      profile_path: "/qCpZn2e3dimwbryLnqxZuI88PTi.jpg",
+      cast_id: 87,
+      character: "Gorr",
+      credit_id: "62c8c27f3d4d96004c9f1996",
+      order: 1,
+    },
+    {
+      adult: false,
+      gender: 1,
+      id: 62561,
+      known_for_department: "Acting",
+      name: "Tessa Thompson",
+      original_name: "Tessa Thompson",
+      popularity: 39.495,
+      profile_path: "/fycqdiiM6dsNSbnONBVVQ57ILV1.jpg",
+      cast_id: 88,
+      character: "King Valkyrie",
+      credit_id: "62c8c2a0076ce8004e080e4e",
+      order: 2,
+    },
+    {
+      adult: false,
+      gender: 2,
+      id: 55934,
+      known_for_department: "Directing",
+      name: "Taika Waititi",
+      original_name: "Taika Waititi",
+      popularity: 45.339,
+      profile_path: "/tQeioTj98JxIXldV9yDSUXNt3KY.jpg",
+      cast_id: 89,
+      character: "Korg / Old Kronan God (voice)",
+      credit_id: "62c8c2ae595a5600da429229",
+      order: 3,
+    },
+    {
+      adult: false,
+      gender: 1,
+      id: 524,
+      known_for_department: "Acting",
+      name: "Natalie Portman",
+      original_name: "Natalie Portman",
+      popularity: 65.089,
+      profile_path: "/xcbZjjES1CnvMZMepbS5EaTDUzH.jpg",
+      cast_id: 86,
+      character: "Jane Foster / The Mighty Thor",
+      credit_id: "62c8c275cddbbc0067d2d060",
+      order: 4,
+    },
+    {
+      adult: false,
+      gender: 1,
+      id: 59817,
+      known_for_department: "Acting",
+      name: "Jaimie Alexander",
+      original_name: "Jaimie Alexander",
+      popularity: 33.349,
+      profile_path: "/hO8ADSA0sKnO3VkPjwA7MZE7r5W.jpg",
+      cast_id: 91,
+      character: "Sif",
+      credit_id: "62c8c2c305f9cf004fddbd87",
+      order: 5,
+    },
+  ],
+};
+
+export const SampleFantasyMovies = [
+  {
+    actor: [
+      {
+        id: 224513,
+        name: "Ana de Armas",
+      },
+    ],
+    budget: 12345,
+    genre: [{ id: 28, name: "action" }],
+    plot: "This is an example plot, isn't it great!",
+    releaseDate: Timestamp.now(),
+    title: "Sample Movie",
+    uid: "abc123",
+  },
+  {
+    actor: [
+      {
+        id: 315635,
+        name: "Tom Holland",
+      },
+    ],
+    budget: 54321,
+    genre: [{ id: 12, name: "adventure" }],
+    plot: "This is another example plot, isn't it great!",
+    releaseDate: Timestamp.now(),
+    title: "Sample Movie 2",
+    uid: "def456",
+  },
+];
+
+export const sampleActor = {
+  adult: false,
+  gender: 2,
+  id: 74568,
+  known_for_department: "Acting",
+  name: "Chris Hemsworth",
+  original_name: "Chris Hemsworth",
+  popularity: 114.157,
+  profile_path: "/jpurJ9jAcLCYjgHHfYF32m3zJYm.jpg",
+  cast_id: 85,
+  character: "Thor Odinson",
+  credit_id: "62c8c25290b87e00f53973fb",
+  order: 0,
+  biography:
+    "Chris Hemsworth (born 11 August 1983) is an Australian actor. He is best known for his roles as Kim Hyde in the Australian TV series Home and Away (2004) and as Thor in the Marvel Cinematic Universe films Thor (2011), The Avengers (2012), Thor: The Dark World (2013), Avengers: Age of Ultron (2015), Thor: Ragnarok (2017), Avengers: Infinity War (2018), Avengers: Endgame (2019), and Thor: Love and Thunder (2022). He has also appeared in the science fiction action film Star Trek(2009), the thriller adventure A Perfect Getaway (2009), the horror comedy The Cabin in the Woods (2012), the dark fantasy action film Snow White and the Huntsman (2012), the war film Red Dawn (2012) and the biographical sports drama film Rush (2013). Description above from the Wikipedia article Chris Hemsworth, licensed under CC-BY-SA, full list of contributors on Wikipedia.",
 };
