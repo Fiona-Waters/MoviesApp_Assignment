@@ -4,7 +4,10 @@
 Name: Fiona Waters
 
 ## Overview.
-A React.js Web Application allowing anyone to view popular and up to date movies and tv shows as well as actors. Movies and TV shows can be favourited and/or added to a must watch list. A logged-in user can access the Fantasy Movie feature, favourites and must watch list.
+A React.js Web Application allowing anyone to view popular and up to date movies, tv shows and actors. Movies and TV shows can be favourited and/or added to a must watch list. A logged-in user can access the Fantasy Movie feature, favourites and must watch list.
+
+* Test User Details
+ `EMAIL: homer@simpson.com PASSWORD: secret`
 
 Added Features
 + TV Series Page
@@ -123,7 +126,7 @@ Routes added:
 
 ![cache](https://user-images.githubusercontent.com/76408967/185811311-3a58161c-a973-4a83-aee5-a5efc8a64f20.jpg)
 
-## Authentication (if relevant).
+## Authentication
 
 Firebase Authentication has been added.  2 Users added and allowed to sign in with email and password. Third party component [react-firebase-hooks](https://github.com/CSFrequency/react-firebase-hooks) was used, specifically the useAuthState, and useSignInWithEmailAndPassword hooks. These hooks are used through the login page, the fantasy movie form and protected routes. The [Firebase Authentication Documentation](https://firebase.google.com/docs/auth/web/start?hl=en&authuser=0) was also used extensively.
 Once a user clicks on one of the protected routes listed below they will be prompted to login via the login form. By providing a valid user email address and password this can be achieved.
@@ -133,14 +136,14 @@ Protected Routes:
 + /movies/favourites
 + /must-watch
 
-## Server-side persistence (if relevant)
+## Server-side persistence
 Any movies added using the My Fantasy Movie feature are persisted to Firebase Firestore Database and retrieved from there on rendering of page as long as user is logged in. If not logged in the user will be prompted to do so. Third party component [react-firebase-hooks](https://github.com/CSFrequency/react-firebase-hooks) was used, specifically the useCollectionData hook. The [Firebase Firestore Documentation](https://firebase.google.com/docs/firestore/query-data/get-data?authuser=0#web-version-9_6) was also used extensively.
 I would also like to include the users favourites and must watch list but unfortunately due to time constraints this was not achieved.
 
 + My Fantasy Movie data is persisted.
 ![firestoreDatabase](https://user-images.githubusercontent.com/76408967/185812047-77749fbf-47f7-423f-a280-0da00791bacb.jpg)
 
-## Additional features (if relevant),
+## Additional features
 + Filtering
     + This feature was extended so that the user can filter by Language and Vote Average.
     + Some time was spent on filtering movie data by Certification. Unfortunately it came to light that I could not get the data in the way that I wanted it from the available API endpoint. Code relating to this remains to show the work put it.  
@@ -150,7 +153,7 @@ I would also like to include the users favourites and must watch list but unfort
     + This allows a user to choose multiple actors/genres from the list and can also search by typing in the 'choose genres/choose actors' fields. 
 
 
-## Independent learning (if relevant),
+## Independent learning 
 + The addition of Firebase Authentication and Server-side persistence required a large amount of independent learning and research.
 + Independent learning and research also took place while using third party components in the 'My Fantasy Movie' form which included 
     +  [react-multi-date-picker](https://www.npmjs.com/package/react-multi-date-picker) and 
